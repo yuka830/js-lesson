@@ -7,7 +7,7 @@ const listItems = [
   { to: "message.html", img: "2.png", alt: "画像2", text: "メッセージ" },
 ];
 
-const p = new Promise((resolve) => {
+const newList = new Promise((resolve) => {
   resolve(listItems);
 }).then((val) => {
   val.forEach((key) => {
