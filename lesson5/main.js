@@ -7,10 +7,8 @@ const listItems = [
   { to: "message.html", img: "2.png", alt: "画像2", text: "メッセージ" },
 ];
 
-const newList = new Promise((resolve) => {
-  resolve(listItems);
-}).then((val) => {
-  val.forEach((key) => {
+function newList(date) {
+  date.forEach((key) => {
     const li = document.createElement("li");
     const a = document.createElement("a");
     const img = document.createElement("img");
@@ -24,7 +22,13 @@ const newList = new Promise((resolve) => {
       .appendChild(li)
       .appendChild(a)
       .insertAdjacentElement("afterbegin", img);
-  });
 
-  ul.appendChild(fragment);
+    ul.appendChild(fragment);
+  });
+}
+
+new Promise((resolve, reject) => {
+  resolve(listItems);
+}).then((val) => {
+  newList(val);
 });
