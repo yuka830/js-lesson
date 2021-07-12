@@ -1,6 +1,6 @@
 "use strict";
 
-const insert = new Promise((resolve, reject) => {
+const fetchedData = new Promise((resolve, reject) => {
   const listItems = [
     { to: "bookmark.html", img: "1.png", alt: "画像1", text: "ブックマーク" },
     { to: "message.html", img: "2.png", alt: "画像2", text: "メッセージ" },
@@ -8,7 +8,7 @@ const insert = new Promise((resolve, reject) => {
   resolve(listItems);
 });
 
-function newList(data) {
+function createNewList(data) {
   const fragment = document.createDocumentFragment();
   data.forEach((key) => {
     const li = document.createElement("li");
@@ -33,4 +33,4 @@ function insertList(data) {
   ul.appendChild(data);
 }
 
-insert.then((listItems) => insertList(newList(listItems)));
+fetchedData.then((listItems) => insertList(createNewList(listItems)));
