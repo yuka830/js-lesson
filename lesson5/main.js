@@ -1,14 +1,16 @@
 "use strict";
 
-const ul = document.getElementById("js-lists");
 const fragment = document.createDocumentFragment();
 const listItems = [
   { to: "bookmark.html", img: "1.png", alt: "画像1", text: "ブックマーク" },
   { to: "message.html", img: "2.png", alt: "画像2", text: "メッセージ" },
 ];
+const insert = new Promise((resolve, reject) => {
+  resolve(listItems);
+});
 
-function newList(date) {
-  date.forEach((key) => {
+function newList(data) {
+  data.forEach((key) => {
     const li = document.createElement("li");
     const a = document.createElement("a");
     const img = document.createElement("img");
@@ -22,13 +24,15 @@ function newList(date) {
       .appendChild(li)
       .appendChild(a)
       .insertAdjacentElement("afterbegin", img);
-
-    ul.appendChild(fragment);
   });
+  return fragment;
 }
 
-new Promise((resolve, reject) => {
-  resolve(listItems);
-}).then((val) => {
-  newList(val);
+function insertList(data) {
+  const ul = document.getElementById("js-lists");
+  ul.appendChild(data);
+}
+
+insert.then((listItems) => {
+  insertList(newList(listItems));
 });
