@@ -2,15 +2,18 @@
 
 const ul = document.getElementById("js-lists");
 const fragment = document.createDocumentFragment();
-const fetchedData = new Promise((resolve, reject) => {
-  const listItems = [
-    { to: "bookmark.html", img: "1.png", alt: "画像1", text: "ブックマーク" },
-    { to: "message.html", img: "2.png", alt: "画像2", text: "メッセージ" }
-  ];
-  setTimeout(() => {
-    resolve(listItems);
-  }, 3000);
-});
+const loader = document.getElementById("loader");
+
+window.onload = () => {
+  const fetchedData = new Promise((resolve, reject) => {
+    const listItems = [
+      { to: "bookmark.html", img: "1.png", alt: "画像1", text: "ブックマーク" },
+      { to: "message.html", img: "2.png", alt: "画像2", text: "メッセージ" }
+    ];
+    setTimeout(() => {
+      resolve(listItems);
+    }, 2500);
+  });
 
 function createNewList(data) {
   data.forEach((key) => {
@@ -31,4 +34,8 @@ function createNewList(data) {
   ul.appendChild(fragment);
 }
 
-fetchedData.then((listItems) => createNewList(listItems));
+fetchedData.then((listItems) => {
+  loader.classList.add('loaded');
+  createNewList(listItems);
+});
+}
