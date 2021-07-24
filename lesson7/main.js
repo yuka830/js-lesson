@@ -3,16 +3,18 @@
 const wrapper = document.getElementById("js-wrapper");
 const ul = document.getElementById("js-lists");
 const fragment = document.createDocumentFragment();
-const loader = document.createElement("div");
 
 const loading = () => {
+  const loader = document.createElement("div");
   const loaderImage = document.createElement("img");
+  loader.id = "loader";
   loader.classList.add("loading");
   loaderImage.src = "img/loading-circle.gif";
   wrapper.appendChild(loader).appendChild(loaderImage);
 };
 
 const loaded = () => {
+  const loader = document.getElementById("loader");
   loader.classList.add("loaded");
 };
 
@@ -21,7 +23,7 @@ window.onload = () => {
   const fetchedData = new Promise((resolve, reject) => {
     const listItems = [
       { to: "bookmark.html", img: "1.png", alt: "画像1", text: "ブックマーク" },
-      { to: "message.html", img: "2.png", alt: "画像2", text: "メッセージ" }
+      { to: "message.html", img: "2.png", alt: "画像2", text: "メッセージ" },
     ];
     setTimeout(() => {
       resolve(listItems);
