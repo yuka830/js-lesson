@@ -3,14 +3,21 @@
 const wrapper = document.getElementById("js-wrapper");
 const ul = document.getElementById("js-lists");
 const fragment = document.createDocumentFragment();
+const loader = document.createElement("div");
 
-window.onload = () => {
-  const loader = document.createElement("div");
+const loading = () => {
   const loaderImage = document.createElement("img");
   loader.classList.add("loading");
   loaderImage.src = "img/loading-circle.gif";
   wrapper.appendChild(loader).appendChild(loaderImage);
+};
 
+const loaded = () => {
+  loader.classList.add("loaded");
+};
+
+window.onload = () => {
+  loading();
   const fetchedData = new Promise((resolve, reject) => {
     const listItems = [
       { to: "bookmark.html", img: "1.png", alt: "画像1", text: "ブックマーク" },
@@ -21,7 +28,7 @@ window.onload = () => {
     }, 2500);
   });
 
-  function createNewList(data) {
+  const createNewList = (data) => {
     data.forEach((key) => {
       const li = document.createElement("li");
       const a = document.createElement("a");
@@ -38,10 +45,10 @@ window.onload = () => {
         .insertAdjacentElement("afterbegin", img);
     });
     ul.appendChild(fragment);
-  }
+  };
 
   fetchedData.then((listItems) => {
-    loader.classList.add("loaded");
+    loaded();
     createNewList(listItems);
   });
 };
