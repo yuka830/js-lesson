@@ -26,8 +26,8 @@ window.onload = () => {
       { to: "message.html", img: "2.png", alt: "画像2", text: "メッセージ" },
     ];
     setTimeout(() => {
-      resolve(listItems);
-    }, 2500);
+      reject("error!");
+    }, 3000);
   });
 
   const createNewList = (data) => {
@@ -49,8 +49,12 @@ window.onload = () => {
     ul.appendChild(fragment);
   };
 
-  fetchedData.then((listItems) => {
-    loaded();
-    createNewList(listItems);
-  });
+  fetchedData
+    .then((listItems) => {
+      loaded();
+      createNewList(listItems);
+    })
+    .catch((error) => {
+      console.log(error);
+    });
 };
