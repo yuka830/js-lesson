@@ -49,8 +49,11 @@ window.onload = () => {
     ul.appendChild(fragment);
   };
 
-  fetchedData.then((listItems) => {
+  const callLists = async () => {
+    const listsContents = await fetchedData;
     loaded();
-    createNewList(listItems);
-  });
+    createNewList(listsContents);
+  };
+
+  callLists();
 };
