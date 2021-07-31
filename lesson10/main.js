@@ -52,12 +52,11 @@ window.onload = () => {
   const callLists = async () => {
     try {
       const listsContents = await fetchedData;
-      loaded();
       createNewList(listsContents);
     } catch (error) {
       console.error(error);
     } finally {
-      console.log("done");
+      loaded();
     }
   };
 
