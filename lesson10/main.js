@@ -54,6 +54,8 @@ window.onload = () => {
       const listsContents = await fetchedData;
       createNewList(listsContents);
     } catch (error) {
+      const wrapper = document.getElementById("js-wrapper");
+      wrapper.textContent = "データの取得ができませんでした。";
       console.error(error);
     } finally {
       loaded();
