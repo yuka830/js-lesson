@@ -52,7 +52,7 @@ window.onload = () => {
   const callLists = async () => {
     try {
       const listsContents = await fetchedData;
-      createNewList(listsContents);
+      return listsContents;
     } catch (error) {
       const wrapper = document.getElementById("js-wrapper");
       wrapper.textContent = "データの取得ができませんでした。";
@@ -62,5 +62,7 @@ window.onload = () => {
     }
   };
 
-  callLists();
+  callLists().then((val) => {
+    createNewList(val);
+  });
 };
