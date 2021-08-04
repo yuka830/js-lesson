@@ -62,7 +62,10 @@ window.onload = () => {
     }
   };
 
-  callLists().then((val) => {
+  const result = async () => {
+    const val = await callLists();
     createNewList(val);
-  });
+  };
+
+  result();
 };
