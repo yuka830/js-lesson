@@ -20,7 +20,7 @@ window.onload = () => {
   const fetchedData = new Promise((resolve, reject) => {
     const listItems = [
       { to: "bookmark.html", img: "1.png", alt: "画像1", text: "ブックマーク" },
-      { to: "message.html", img: "2.png", alt: "画像2", text: "メッセージ" }
+      { to: "message.html", img: "2.png", alt: "画像2", text: "メッセージ" },
     ];
     setTimeout(() => {
       resolve(listItems);
@@ -50,10 +50,22 @@ window.onload = () => {
   };
 
   const callLists = async () => {
-    const listsContents = await fetchedData;
-    loaded();
-    createNewList(listsContents);
+    try {
+      const listsContents = await fetchedData;
+      return listsContents;
+    } catch (error) {
+      const wrapper = document.getElementById("js-wrapper");
+      wrapper.textContent = "データの取得ができませんでした。";
+      console.error(error);
+    } finally {
+      loaded();
+    }
   };
 
-  callLists();
+  const init = async () => {
+    const val = await callLists();
+    createNewList(val);
+  };
+
+  init();
 };
