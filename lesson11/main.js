@@ -17,15 +17,19 @@ const loaded = () => {
 
 window.onload = () => {
   loading();
+
   const fetchedData = new Promise((resolve, reject) => {
-    const listItems = [
-      { to: "bookmark.html", img: "1.png", alt: "画像1", text: "ブックマーク" },
-      { to: "message.html", img: "2.png", alt: "画像2", text: "メッセージ" },
-    ];
     setTimeout(() => {
-      resolve(listItems);
+      resolve(listItems());
     }, 2500);
   });
+
+  const listItems = async () => {
+    const jsonUrl = "https://jsondata.okiba.me/v1/json/PBH3M210806155341";
+    const response = await fetch(jsonUrl);
+    const json = await response.json();
+    return json.data;
+  };
 
   const createNewList = (data) => {
     const ul = document.getElementById("js-lists");
@@ -36,7 +40,7 @@ window.onload = () => {
       const a = document.createElement("a");
       const img = document.createElement("img");
 
-      a.href = `/${key.to}`;
+      a.href = `/${key.a}`;
       a.textContent = key.text;
       img.src = key.img;
       img.alt = key.alt;
