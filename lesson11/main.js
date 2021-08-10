@@ -45,7 +45,6 @@ const createNewList = (data) => {
 };
 
 const fetchedData = async () => {
-  loading();
   try {
     const response = await fetch(jsonUrl);
     const json = await response.json();
@@ -60,9 +59,10 @@ const fetchedData = async () => {
 };
 
 const init = async () => {
+  createLoader();
+  loading();
   const val = await fetchedData();
   createNewList(val);
 };
 
-createLoader();
 init();
