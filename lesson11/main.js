@@ -45,6 +45,7 @@ const createNewList = (data) => {
 };
 
 const fetchedData = async () => {
+  loading();
   try {
     const response = await fetch(jsonUrl);
     const json = await response.json();
@@ -64,5 +65,4 @@ const init = async () => {
 };
 
 createLoader();
-loading();
 init();
