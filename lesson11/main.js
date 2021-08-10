@@ -1,6 +1,6 @@
 "use strict";
 
-const loading = () => {
+const createLoader = () => {
   const wrapper = document.getElementById("js-wrapper");
   const loader = document.createElement("div");
   const loaderImage = document.createElement("img");
@@ -8,6 +8,11 @@ const loading = () => {
   loader.classList.add("loading");
   loaderImage.src = "img/loading-circle.gif";
   wrapper.appendChild(loader).appendChild(loaderImage);
+};
+
+const loading = () => {
+  const loader = document.getElementById("loader");
+  loader.classList.add("loading");
 };
 
 const loaded = () => {
@@ -41,7 +46,6 @@ const createNewList = (data) => {
 
 const fetchedData = async () => {
   try {
-    loading();
     const response = await fetch(jsonUrl);
     const json = await response.json();
     return json.data;
@@ -59,4 +63,6 @@ const init = async () => {
   createNewList(val);
 };
 
+createLoader();
+loading();
 init();
