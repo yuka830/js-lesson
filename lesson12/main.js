@@ -65,4 +65,8 @@ const init = async () => {
   createNewList(val);
 };
 
-init();
+const button = document.getElementById("js-button");
+button.addEventListener("click", () => {
+  init();
+  button.style.display = "none";
+});
