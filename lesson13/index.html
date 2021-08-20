@@ -11,10 +11,17 @@
 </head>
 
 <body>
-  <div id="js-wrapper">
-    <ul id="js-lists"></ul>
+  <div class="modal">
+    <div id="js-modal" class="modal__wrapper hidden">
+      <div id="js-wrapper">
+        <ul id="js-lists"></ul>
+      </div>
+      <button id="js-request" class="modal__request-btn button">Request the data</button>
+      <a id="js-close" class="modal__close-link">Close</a>
+    </div>
+    <div id="js-mask" class="modal__mask hidden"></div>
+    <button id="js-open" class="modal__open-btn button">Modal Open</button>
   </div>
-  <button id="js-button" class="button">Click</button>
   <script src="main.js"></script>
 </body>
 

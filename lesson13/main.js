@@ -1,4 +1,9 @@
 "use strict";
+const openModal = document.getElementById("js-open");
+const closeModal = document.getElementById("js-close");
+const mask = document.getElementById("js-mask");
+const modal = document.getElementById("js-modal");
+const requestBtn = document.getElementById("js-request");
 
 const createLoader = () => {
   const wrapper = document.getElementById("js-wrapper");
@@ -65,8 +70,21 @@ const init = async () => {
   createNewList(val);
 };
 
-const button = document.getElementById("js-button");
-button.addEventListener("click", () => {
+openModal.addEventListener("click", () => {
+  modal.classList.remove("hidden");
+  mask.classList.remove("hidden");
+});
+
+closeModal.addEventListener("click", () => {
+  modal.classList.add("hidden");
+  mask.classList.add("hidden");
+});
+
+requestBtn.addEventListener("click", () => {
   init();
-  button.style.display = "none";
+  requestBtn.style.display = "none";
+});
+
+mask.addEventListener("click", () => {
+  closeModal.click();
 });
