@@ -36,6 +36,7 @@ const createNewList = (data) => {
     const a = document.createElement("a");
     const img = document.createElement("img");
 
+    li.classList.add("list")
     a.href = `/${key.a}`;
     a.textContent = key.text;
     img.src = key.img;
@@ -82,7 +83,9 @@ closeModal.addEventListener("click", () => {
 
 requestBtn.addEventListener("click", () => {
   init();
-  requestBtn.style.display = "none";
+  modal.style.display = "none";
+  mask.classList.add("hidden");
+  openModal.classList.add("hidden");
 });
 
 mask.addEventListener("click", () => {

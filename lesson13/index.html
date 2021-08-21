@@ -5,22 +5,23 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-  <link rel="stylesheet" href="style.css" type="text/css" />
+  <link rel="stylesheet" href="css/reset.css" type="text/css" />
+  <link rel="stylesheet" href="css/style.css" type="text/css" />
   <title>TerraceTechフロントエンドエンジニア養成所</title>
   <link rel="stylesheet" href="/style.css">
 </head>
 
 <body>
-  <div class="modal">
-    <div id="js-modal" class="modal__wrapper hidden">
-      <div id="js-wrapper">
-        <ul id="js-lists"></ul>
-      </div>
-      <button id="js-request" class="modal__request-btn button">Request the data</button>
-      <a id="js-close" class="modal__close-link">Close</a>
+  <div class="container">
+    <div id="js-wrapper">
+      <ul id="js-lists"></ul>
     </div>
-    <div id="js-mask" class="modal__mask hidden"></div>
-    <button id="js-open" class="modal__open-btn button">Modal Open</button>
+    <div id="js-modal" class="modal hidden">
+      <button id="js-request" class="modal__btn button">Request the data</button>
+      <a id="js-close" class="modal__link">Close</a>
+    </div>
+    <div id="js-mask" class="mask hidden"></div>
+    <button id="js-open" class="open-btn button">Modal Open</button>
   </div>
   <script src="main.js"></script>
 </body>
