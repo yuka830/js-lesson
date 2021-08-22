@@ -71,6 +71,12 @@ const init = async () => {
   createNewList(val);
 };
 
+const getNumbers = () => {
+  const inputNumberId = document.getElementById("js-number")
+  const inputNumberValue = inputNumberId.value;
+  return inputNumberValue;
+}
+
 openModal.addEventListener("click", () => {
   modal.classList.remove("hidden");
   mask.classList.remove("hidden");
@@ -82,6 +88,7 @@ closeModal.addEventListener("click", () => {
 });
 
 requestBtn.addEventListener("click", () => {
+  console.log(getNumbers());
   init();
   modal.style.display = "none";
   mask.classList.add("hidden");
