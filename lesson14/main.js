@@ -72,26 +72,33 @@ const init = async () => {
 };
 
 const getNumbers = () => {
-  const inputNumberId = document.getElementById("js-number")
-  const inputNumberValue = inputNumberId.value;
+  const inputNumber = document.getElementById("js-number")
+  const inputNumberValue = inputNumber.value;
   return inputNumberValue;
 }
 
-openModal.addEventListener("click", () => {
+const showModalItems = () => {
   modal.classList.remove("hidden");
   mask.classList.remove("hidden");
+}
+
+const hiddenModalItems = () => {
+  modal.classList.add("hidden");
+  mask.classList.add("hidden");
+}
+
+openModal.addEventListener("click", () => {
+  showModalItems();
 });
 
 closeModal.addEventListener("click", () => {
-  modal.classList.add("hidden");
-  mask.classList.add("hidden");
+  hiddenModalItems();
 });
 
 requestBtn.addEventListener("click", () => {
   console.log(getNumbers());
   init();
-  modal.style.display = "none";
-  mask.classList.add("hidden");
+  hiddenModalItems();
   openModal.classList.add("hidden");
 });
 
