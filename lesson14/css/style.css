@@ -45,6 +45,7 @@
 .modal {
   background-color: #fff;
   width: 30%;
+  min-width: 200px;
   border: 2px solid black;
   position: absolute;
   top: 40px;
