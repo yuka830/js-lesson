@@ -72,33 +72,32 @@ const init = async () => {
 };
 
 const getNumbers = () => {
-  const inputNumber = document.getElementById("js-number")
-  const inputNumberValue = inputNumber.value;
-  return inputNumberValue;
+  const inputNumber = document.getElementById("js-number");
+  return inputNumber.value;
 }
 
-const showModalItems = () => {
+const showModal = () => {
   modal.classList.remove("hidden");
   mask.classList.remove("hidden");
 }
 
-const hiddenModalItems = () => {
+const hiddenModal = () => {
   modal.classList.add("hidden");
   mask.classList.add("hidden");
 }
 
 openModal.addEventListener("click", () => {
-  showModalItems();
+  showModal();
 });
 
 closeModal.addEventListener("click", () => {
-  hiddenModalItems();
+  hiddenModal();
 });
 
 requestBtn.addEventListener("click", () => {
   console.log(getNumbers());
   init();
-  hiddenModalItems();
+  hiddenModal();
   openModal.classList.add("hidden");
 });
 
