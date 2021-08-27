@@ -36,7 +36,7 @@ const createNewList = (data) => {
     const a = document.createElement("a");
     const img = document.createElement("img");
 
-    li.classList.add("list")
+    li.classList.add("list");
     a.href = `/${key.a}`;
     a.textContent = key.text;
     img.src = key.img;
@@ -64,27 +64,40 @@ const fetchedData = async () => {
   }
 };
 
-const init = async () => {
+const init = async (val) => {
+  console.log(val);
   createLoader();
   loading();
-  const val = await fetchedData();
-  createNewList(val);
+  const listsData = await fetchedData();
+  createNewList(listsData);
+};
+
+const getNumbers = () => {
+  const inputNumber = document.getElementById("js-number");
+  return inputNumber.value;
+};
+
+const showModal = () => {
+  modal.classList.remove("hidden");
+  mask.classList.remove("hidden");
+};
+
+const hiddenModal = () => {
+  modal.classList.add("hidden");
+  mask.classList.add("hidden");
 };
 
 openModal.addEventListener("click", () => {
-  modal.classList.remove("hidden");
-  mask.classList.remove("hidden");
+  showModal();
 });
 
 closeModal.addEventListener("click", () => {
-  modal.classList.add("hidden");
-  mask.classList.add("hidden");
+  hiddenModal();
 });
 
 requestBtn.addEventListener("click", () => {
-  init();
-  modal.style.display = "none";
-  mask.classList.add("hidden");
+  init(getNumbers());
+  hiddenModal();
   openModal.classList.add("hidden");
 });
 
