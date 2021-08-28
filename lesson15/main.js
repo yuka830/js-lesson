@@ -3,7 +3,7 @@ const openModal = document.getElementById("js-open");
 const closeModal = document.getElementById("js-close");
 const mask = document.getElementById("js-mask");
 const modal = document.getElementById("js-modal");
-const requestBtn = document.getElementById("js-request");
+const form = document.getElementById("js-form");
 
 const createLoader = () => {
   const wrapper = document.getElementById("js-wrapper");
@@ -72,9 +72,10 @@ const init = async (val) => {
   createNewList(listsData);
 };
 
-const getNumbers = () => {
+const inputValue = () => {
   const inputNumber = document.getElementById("js-number");
-  return inputNumber.value;
+  const inputName = document.getElementById("js-name");
+  return `数字：${inputNumber.value},名前：${inputName.value}`;
 };
 
 const showModal = () => {
@@ -95,8 +96,9 @@ closeModal.addEventListener("click", () => {
   hiddenModal();
 });
 
-requestBtn.addEventListener("click", () => {
-  init(getNumbers());
+form.addEventListener("submit", (e) => {
+  e.preventDefault();
+  init(inputValue());
   hiddenModal();
   openModal.classList.add("hidden");
 });
