@@ -72,7 +72,7 @@ const init = async (val) => {
   createNewList(listsData);
 };
 
-const inputValue = () => {
+const returnInputValue = () => {
   const inputNumber = document.getElementById("js-number");
   const inputName = document.getElementById("js-name");
   return `数字：${inputNumber.value},名前：${inputName.value}`;
@@ -98,7 +98,7 @@ closeModal.addEventListener("click", () => {
 
 form.addEventListener("submit", (e) => {
   e.preventDefault();
-  init(inputValue());
+  init(returnInputValue());
   hiddenModal();
   openModal.classList.add("hidden");
 });
