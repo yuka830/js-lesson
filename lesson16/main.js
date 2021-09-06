@@ -4,7 +4,7 @@ const jsonUrl = "https://jsondata.okiba.me/v1/json/yFXrE210903000829";
 const newsWrapper = document.getElementById("js-news");
 
 const createElementWithClassName = (element, name) => {
-  const variableName = document.createElement(element);
+  const createdElement = document.createElement(element);
   variableName.classList.add(name);
   return variableName;
 };
@@ -46,7 +46,7 @@ const createNewContent = data => {
   
   data.forEach( key => {
     const newsContent = createElementWithClassName("div", "news__content");
-    const contentUl = createElementWithClassName("ul", "news__lists");
+    const contentUl = createElementWithClassName("ul", "js-news__lists");
     const titleFragment = document.createDocumentFragment();
     newsContent.dataset.content = key.id;
 
@@ -58,7 +58,7 @@ const createNewContent = data => {
       titleFragment.appendChild(contentLi).appendChild(a);
     })
     
-    if (key.selected === true) {
+    if (key.selected) {
       newsContent.classList.add("is-show");
     }
     contentFragment.appendChild(newsContent).appendChild(contentUl).appendChild(titleFragment);
@@ -84,7 +84,8 @@ const tabSwitch = () => {
       i++;
     };
     
-    newsWrapper.querySelectorAll('[data-content="' + targetTabVal + '"]')[0].classList.add("is-show");
+   const target = `[data-content="${targetTabVal}"]`
+    newsWrapper.querySelectorAll(target)[0].classList.add("is-show");
     targetTab.classList.add("is-active");
   };
   
