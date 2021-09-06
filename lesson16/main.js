@@ -5,8 +5,8 @@ const newsWrapper = document.getElementById("js-news");
 
 const createElementWithClassName = (element, name) => {
   const createdElement = document.createElement(element);
-  variableName.classList.add(name);
-  return variableName;
+  createdElement.classList.add(name);
+  return createdElement;
 };
 
 //comment-icon
@@ -19,17 +19,16 @@ newLabel.textContent = "NEW!";
 //news-img
 const imgWrapper = createElementWithClassName("div", "news__img");
 
-
 //tab
 const createNewTab = data => {
   const tabUl = document.querySelector(".news__tabs");
   const tabFragment = document.createDocumentFragment();
 
-  data.forEach((key) => {
+  data.forEach( key => {
     const tabLi = createElementWithClassName("li", "tab");
     tabLi.textContent = key.category;
     tabLi.dataset.tab = key.id;
-    if (key.selected === true) {
+    if (key.selected) {
       tabLi.classList.add("is-active");
     }
 
@@ -43,7 +42,7 @@ const createNewTab = data => {
 //news
 const createNewContent = data => {
   const contentFragment = document.createDocumentFragment();
-  
+
   data.forEach( key => {
     const newsContent = createElementWithClassName("div", "news__content");
     const contentUl = createElementWithClassName("ul", "js-news__lists");
@@ -56,12 +55,15 @@ const createNewContent = data => {
       a.textContent = array.title;
       a.href = "#";
       titleFragment.appendChild(contentLi).appendChild(a);
-    })
-    
+    });
+
     if (key.selected) {
       newsContent.classList.add("is-show");
     }
-    contentFragment.appendChild(newsContent).appendChild(contentUl).appendChild(titleFragment);
+    contentFragment
+      .appendChild(newsContent)
+      .appendChild(contentUl)
+      .appendChild(titleFragment);
   });
 
   newsWrapper.appendChild(contentFragment);
@@ -72,29 +74,35 @@ const tabSwitch = () => {
   const tabs = document.querySelectorAll("[data-tab]");
   const contents = document.querySelectorAll("[data-content]");
 
-  const handleClick = e => {
-    e.preventDefault();
+  const handleClick = (e) => {
     const targetTab = e.target;
     const targetTabVal = targetTab.dataset.tab;
-    
-    let i = 0;
-    while (i < tabs.length) {
-      contents[i].classList.remove("is-show");
-      tabs[i].classList.remove("is-active");
-      i++;
-    };
-    
-   const target = `[data-content="${targetTabVal}"]`
-    newsWrapper.querySelectorAll(target)[0].classList.add("is-show");
-    targetTab.classList.add("is-active");
+    e.preventDefault();
+    hideNewsElements(tabs, contents);
+    showNewsElements(targetTab, targetTabVal);
   };
-  
+
   let i = 0;
   while (i < tabs.length) {
-    tabs[i].addEventListener("click", e => handleClick(e));
+    tabs[i].addEventListener("click", (e) => handleClick(e));
     i++;
   }
-}
+};
+
+const showNewsElements = (tabElement, dataSetVal) => {
+  const target = `[data-content="${dataSetVal}"]`;
+  newsWrapper.querySelectorAll(target)[0].classList.add("is-show");
+  tabElement.classList.add("is-active");
+};
+
+const hideNewsElements = (tabDataSetArray, contentDataSetArray) => {
+  let i = 0;
+  while (i < tabDataSetArray.length) {
+    tabDataSetArray[i].classList.remove("is-active");
+    contentDataSetArray[i].classList.remove("is-show");
+    i++;
+  }
+};
 
 
 const fetchedData = async () => {
