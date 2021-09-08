@@ -122,7 +122,6 @@ const init = async () => {
   const newsUiData = await fetchedData();
   createNewTab(newsUiData);
   createNewContent(newsUiData);
-  tabSwitch();
 };
 
 init();
