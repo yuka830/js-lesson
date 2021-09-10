@@ -82,10 +82,8 @@ const tabSwitch = () => {
     showNewsElements(targetTab, targetTabVal);
   };
 
-  let i = 0;
-  while (i < tabs.length) {
+  for (let i = 0; i < tabs.length; i++) {
     tabs[i].addEventListener("click", (e) => handleClick(e));
-    i++;
   }
 };
 
@@ -96,11 +94,9 @@ const showNewsElements = (tabElement, dataSetVal) => {
 };
 
 const hideNewsElements = (tabDataSetArray, contentDataSetArray) => {
-  let i = 0;
-  while (i < tabDataSetArray.length) {
+  for (let i = 0; i < tabDataSetArray.length; i++) {
     tabDataSetArray[i].classList.remove("is-active");
     contentDataSetArray[i].classList.remove("is-show");
-    i++;
   }
 };
 
