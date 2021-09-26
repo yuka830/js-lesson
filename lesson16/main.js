@@ -1,7 +1,8 @@
 "use strict";
 
-const jsonUrl = "https://jsondata.okiba.me/v1/json/yFXrE210903000829";
+const jsonUrl = "https://jsondata.okiba.me/v1/json/BFwf7210926001715";
 const newsWrapper = document.getElementById("js-news");
+const tabUl = document.querySelector(".news__tabs");
 
 const createElementWithClassName = (element, name) => {
   const createdElement = document.createElement(element);
@@ -20,15 +21,15 @@ newLabel.textContent = "NEW!";
 const imgWrapper = createElementWithClassName("div", "news__img");
 
 //tab
-const createNewTab = data => {
+const createNewTab = (data) => {
   const tabUl = document.querySelector(".news__tabs");
   const tabFragment = document.createDocumentFragment();
 
-  data.forEach( key => {
+  data.forEach((key,index) => {
     const tabLi = createElementWithClassName("li", "tab");
     tabLi.textContent = key.category;
     tabLi.dataset.tab = key.id;
-    if (key.selected) {
+    if (index === 0) {
       tabLi.classList.add("is-active");
     }
 
@@ -40,16 +41,16 @@ const createNewTab = data => {
 };
 
 //news
-const createNewContent = data => {
+const createNewContent = (data) => {
   const contentFragment = document.createDocumentFragment();
 
-  data.forEach( key => {
+  data.forEach((key,index) => {
     const newsContent = createElementWithClassName("div", "news__content");
     const contentUl = createElementWithClassName("ul", "js-news__lists");
     const titleFragment = document.createDocumentFragment();
     newsContent.dataset.content = key.id;
 
-    key.article.forEach( array => {
+    key.article.forEach((array) => {
       const contentLi = createElementWithClassName("li", "news__item");
       const a = document.createElement("a");
       a.textContent = array.title;
@@ -57,7 +58,7 @@ const createNewContent = data => {
       titleFragment.appendChild(contentLi).appendChild(a);
     });
 
-    if (key.selected) {
+    if (index === 0) {
       newsContent.classList.add("is-show");
     }
     contentFragment
@@ -71,35 +72,30 @@ const createNewContent = data => {
 
 //tabSwitch
 const tabSwitch = () => {
-  const tabs = document.querySelectorAll("[data-tab]");
-  const contents = document.querySelectorAll("[data-content]");
-
-  const handleClick = (e) => {
-    const targetTab = e.target;
-    const targetTabVal = targetTab.dataset.tab;
-    e.preventDefault();
-    hideNewsElements(tabs, contents);
-    showNewsElements(targetTab, targetTabVal);
-  };
-
-  for (let i = 0; i < tabs.length; i++) {
-    tabs[i].addEventListener("click", (e) => handleClick(e));
-  }
+  tabUl.addEventListener("click", (e) => handleClick(e));
 };
 
-const showNewsElements = (tabElement, dataSetVal) => {
+const handleClick = (e) => {
+  const targetTab = e.target;
+  const targetTabVal = targetTab.dataset.tab;
+  const activeTab = document.querySelector(".is-active");
+  const activeContent = document.querySelector(".is-show");
+
+  e.preventDefault();
+  hideNewsElements(activeTab, activeContent);
+  showNewsElements(targetTab, targetTabVal);
+};
+
+const showNewsElements = (targetTabElement, dataSetVal) => {
+  targetTabElement.classList.add("is-active");
   const target = `[data-content="${dataSetVal}"]`;
-  newsWrapper.querySelectorAll(target)[0].classList.add("is-show");
-  tabElement.classList.add("is-active");
+  newsWrapper.querySelector(target).classList.add("is-show");
 };
 
-const hideNewsElements = (tabDataSetArray, contentDataSetArray) => {
-  for (let i = 0; i < tabDataSetArray.length; i++) {
-    tabDataSetArray[i].classList.remove("is-active");
-    contentDataSetArray[i].classList.remove("is-show");
-  }
+const hideNewsElements = (currentTabElement, currentContentElement) => {
+  currentTabElement.classList.remove("is-active");
+  currentContentElement.classList.remove("is-show");
 };
-
 
 const fetchedData = async () => {
   try {
