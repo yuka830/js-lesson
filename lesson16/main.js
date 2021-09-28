@@ -2,7 +2,7 @@
 
 const jsonUrl = "https://jsondata.okiba.me/v1/json/BFwf7210926001715";
 const newsWrapper = document.getElementById("js-news");
-const tabUl = document.querySelector(".news__tabs");
+const tabUl = document.getElementById("js-news-tabs");
 
 const createElementWithClassName = (element, name) => {
   const createdElement = document.createElement(element);
@@ -22,7 +22,6 @@ const imgWrapper = createElementWithClassName("div", "news__img");
 
 //tab
 const createNewTab = (data) => {
-  const tabUl = document.querySelector(".news__tabs");
   const tabFragment = document.createDocumentFragment();
 
   data.forEach((key,index) => {
@@ -59,6 +58,7 @@ const createNewContent = (data) => {
     });
 
     if (index === 0) {
+      //とりあえず最初のインデックスをアクティブなタブとする
       newsContent.classList.add("is-show");
     }
     contentFragment
@@ -76,25 +76,24 @@ const tabSwitch = () => {
 };
 
 const handleClick = (e) => {
-  const targetTab = e.target;
-  const targetTabVal = targetTab.dataset.tab;
-  const activeTab = document.querySelector(".is-active");
-  const activeContent = document.querySelector(".is-show");
-
   e.preventDefault();
-  hideNewsElements(activeTab, activeContent);
-  showNewsElements(targetTab, targetTabVal);
+  hideNewsElements();
+  showNewsElements(e);
 };
 
-const showNewsElements = (targetTabElement, dataSetVal) => {
-  targetTabElement.classList.add("is-active");
-  const target = `[data-content="${dataSetVal}"]`;
+const showNewsElements = (e) => {
+  const targetTab = e.target;
+  const targetTabVal = targetTab.dataset.tab;
+  targetTab.classList.add("is-active");
+  const target = `[data-content="${targetTabVal}"]`;
   newsWrapper.querySelector(target).classList.add("is-show");
 };
 
-const hideNewsElements = (currentTabElement, currentContentElement) => {
-  currentTabElement.classList.remove("is-active");
-  currentContentElement.classList.remove("is-show");
+const hideNewsElements = () => {
+  const activeTab = document.querySelector(".is-active");
+  const activeContent = document.querySelector(".is-show");
+  activeTab.classList.remove("is-active");
+  activeContent.classList.remove("is-show");
 };
 
 const fetchedData = async () => {
