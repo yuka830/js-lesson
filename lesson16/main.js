@@ -27,7 +27,7 @@ const createNewTab = (data) => {
   data.forEach((key,index) => {
     const tabLi = createElementWithClassName("li", "tab");
     tabLi.textContent = key.category;
-    tabLi.dataset.tab = key.id;
+    tabLi.dataset.id= key.id;
     if (index === 0) {
       tabLi.classList.add("is-active");
     }
@@ -77,19 +77,19 @@ const tabSwitch = () => {
 
 const handleClick = (e) => {
   e.preventDefault();
-  hideNewsElements();
+  initNewsElements();
   showNewsElements(e);
 };
 
 const showNewsElements = (e) => {
-  const targetTab = e.target;
-  const targetTabVal = targetTab.dataset.tab;
-  targetTab.classList.add("is-active");
-  const target = `[data-content="${targetTabVal}"]`;
+  const eventTarget = e.target;
+  const dataCategory = eventTarget.dataset.id;
+  eventTarget.classList.add("is-active");
+  const target = `[data-content="${dataCategory}"]`;
   newsWrapper.querySelector(target).classList.add("is-show");
 };
 
-const hideNewsElements = () => {
+const initNewsElements = () => {
   const activeTab = document.querySelector(".is-active");
   const activeContent = document.querySelector(".is-show");
   activeTab.classList.remove("is-active");
