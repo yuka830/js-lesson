@@ -27,7 +27,7 @@ const createNewTab = (data) => {
   data.forEach((key,index) => {
     const tabLi = createElementWithClassName("li", "tab");
     tabLi.textContent = key.category;
-    tabLi.dataset.id= key.id;
+    tabLi.dataset.category= key.id;
     if (index === 0) {
       tabLi.classList.add("is-active");
     }
@@ -47,7 +47,8 @@ const createNewContent = (data) => {
     const newsContent = createElementWithClassName("div", "news__content");
     const contentUl = createElementWithClassName("ul", "js-news__lists");
     const titleFragment = document.createDocumentFragment();
-    newsContent.dataset.content = key.id;
+    const categoryName = key.id;
+    newsContent.classList.add(`js-${categoryName}`);
 
     key.article.forEach((array) => {
       const contentLi = createElementWithClassName("li", "news__item");
@@ -83,9 +84,9 @@ const handleClick = (e) => {
 
 const showNewsElements = (e) => {
   const eventTarget = e.target;
-  const dataCategory = eventTarget.dataset.id;
+  const dataCategory = eventTarget.dataset.category;
   eventTarget.classList.add("is-active");
-  const target = `[data-content="${dataCategory}"]`;
+  const target = `.js-${dataCategory}`;
   newsWrapper.querySelector(target).classList.add("is-show");
 };
 
