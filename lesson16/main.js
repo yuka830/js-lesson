@@ -111,7 +111,7 @@ const fetchedNewsComponentData = async () => {
 };
 
 const init = async () => {
-  const newsUiData = await fetchedData();
+  const newsUiData = await fetchedNewsComponentData();
   createNewTab(newsUiData);
   createNewContent(newsUiData);
 };
