@@ -97,7 +97,7 @@ const initNewsElements = () => {
   activeContent.classList.remove("is-show");
 };
 
-const fetchedData = async () => {
+const fetchedNewsComponentData = async () => {
   try {
     const response = await fetch(jsonUrl);
     const json = await response.json();
