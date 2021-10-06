@@ -11,23 +11,38 @@ const createElementWithClassName = (element, name) => {
 };
 
 //comment-icon
-const commentIcon = createElementWithClassName("span", "comment-icon");
+const creatCommentIcon = (element) => {
+  const commentSpan = createElementWithClassName("span", "comment-icon");
+  const commentImg = document.createElement("img");
+  commentImg.src = "./img/comment.png";
+  commentSpan.appendChild(commentImg);
+  element.appendChild(commentSpan);
+};
 
 //new-label
-const newLabel = createElementWithClassName("span", "new-label");
-newLabel.textContent = "NEW!";
+const creatNewLabel = (element) => {
+  const newLabel = createElementWithClassName("span", "new-label");
+  newLabel.textContent = "NEW!";
+  element.appendChild(newLabel);
+};
 
 //news-img
-const imgWrapper = createElementWithClassName("div", "news__img");
+const creatNewsImg = (element, category) => {
+  const imgWrapper = createElementWithClassName("div", "news__img");
+  const newsImg = document.createElement("img");
+  newsImg.src = `./img/${category}.png`;
+  imgWrapper.appendChild(newsImg);
+  element.appendChild(imgWrapper);
+};
 
 //tab
 const createNewTab = (data) => {
   const tabFragment = document.createDocumentFragment();
 
-  data.forEach((key,index) => {
+  data.forEach((key, index) => {
     const tabLi = createElementWithClassName("li", "tab");
     tabLi.textContent = key.category;
-    tabLi.dataset.category= key.id;
+    tabLi.dataset.category = key.id;
     if (index === 0) {
       tabLi.classList.add("is-active");
     }
@@ -43,8 +58,9 @@ const createNewTab = (data) => {
 const createNewContent = (data) => {
   const contentFragment = document.createDocumentFragment();
 
-  data.forEach((key,index) => {
+  data.forEach((key, index) => {
     const newsContent = createElementWithClassName("div", "news__content");
+    const elementForFlex = createElementWithClassName("div", "flex");
     const contentUl = createElementWithClassName("ul", "js-news__lists");
     const titleFragment = document.createDocumentFragment();
     const categoryName = key.id;
@@ -56,14 +72,26 @@ const createNewContent = (data) => {
       a.textContent = array.title;
       a.href = "#";
       titleFragment.appendChild(contentLi).appendChild(a);
+
+      if (array.new) {
+        creatNewLabel(contentLi);
+      }
+
+      if (array.comments > 0) {
+        creatCommentIcon(contentLi);
+      }
     });
 
     if (index === 0) {
       //とりあえず最初のインデックスをアクティブなタブとする
       newsContent.classList.add("is-show");
     }
+
+    creatNewsImg(elementForFlex, categoryName);
+    
     contentFragment
       .appendChild(newsContent)
+      .appendChild(elementForFlex)
       .appendChild(contentUl)
       .appendChild(titleFragment);
   });

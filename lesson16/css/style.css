@@ -1,6 +1,17 @@
+.news {
+  max-width: 70%;
+  min-width: 320px;
+}
+
 .news__tabs {
   display: flex;
   justify-content: center;
+}
+
+.flex {
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: space-between;
 }
 
 .tab {
@@ -46,9 +57,12 @@
   margin-top: 0;
 }
 
+.comment-icon {
+  display: inline-block;
+}
+
 .comment-icon img{
   margin-left: 5px;
-  display: inline-block;
   width: 10%;
   vertical-align: bottom;
 }
