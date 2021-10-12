@@ -1,6 +1,6 @@
 "use strict";
 
-const jsonUrl = "https://jsondata.okiba.me/v1/json/BFwf7210926001715";
+const jsonUrl = "https://jsondata.okiba.me/v1/json/Y3Att211012082350";
 const newsWrapper = document.getElementById("js-news");
 const tabUl = document.getElementById("js-news-tabs");
 
@@ -41,7 +41,7 @@ const createNewTab = (data) => {
 
   data.forEach((key, index) => {
     const tabLi = createElementWithClassName("li", "tab");
-    tabLi.textContent = key.category;
+    tabLi.textContent = capitalize(key.category);
     tabLi.dataset.category = key.id;
     index === 0 && tabLi.classList.add("is-active");
 
