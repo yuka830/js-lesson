@@ -43,9 +43,7 @@ const createNewTab = (data) => {
     const tabLi = createElementWithClassName("li", "tab");
     tabLi.textContent = key.category;
     tabLi.dataset.category = key.id;
-    if (index === 0) {
-      tabLi.classList.add("is-active");
-    }
+    index === 0 && tabLi.classList.add("is-active");
 
     tabLi.addEventListener("click", tabSwitch);
     tabFragment.appendChild(tabLi);
@@ -73,22 +71,15 @@ const createNewContent = (data) => {
       a.href = "#";
       titleFragment.appendChild(contentLi).appendChild(a);
 
-      if (array.new) {
-        creatNewLabel(contentLi);
-      }
-
-      if (array.comments > 0) {
-        creatCommentIcon(contentLi);
-      }
+      array.new && creatNewLabel(contentLi);
+      array.comments > 0 && creatCommentIcon(contentLi);
     });
 
-    if (index === 0) {
-      //とりあえず最初のインデックスをアクティブなタブとする
-      newsContent.classList.add("is-show");
-    }
+    //とりあえず最初のインデックスをアクティブなタブとする
+    index === 0 && newsContent.classList.add("is-show");
 
     creatNewsImg(elementForFlex, categoryName);
-    
+
     contentFragment
       .appendChild(newsContent)
       .appendChild(elementForFlex)
