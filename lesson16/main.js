@@ -36,13 +36,13 @@ const creatNewsImg = (element, category) => {
 };
 
 //tab
-const createNewTab = (data) => {
+const createNewTab = (newsUiItems) => {
   const tabFragment = document.createDocumentFragment();
 
-  data.forEach((key, index) => {
+  newsUiItems.forEach((newsUiItem, index) => {
     const tabLi = createElementWithClassName("li", "tab");
-    tabLi.textContent = capitalize(key.category);
-    tabLi.dataset.category = key.id;
+    tabLi.textContent = newsUiItem.category;
+    tabLi.dataset.category = newsUiItem.category;
     index === 0 && tabLi.classList.add("is-active");
 
     tabLi.addEventListener("click", tabSwitch);
