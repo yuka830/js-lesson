@@ -130,9 +130,9 @@ const fetchedNewsComponentData = async () => {
 };
 
 const init = async () => {
-  const newsUiData = await fetchedNewsComponentData();
-  createNewTab(newsUiData);
-  createNewContent(newsUiData);
+  const newsUiItems = await fetchedNewsComponentData();
+  createNewTab(newsUiItems);
+  createNewContent(newsUiItems);
 };
 
 init();
