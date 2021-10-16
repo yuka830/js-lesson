@@ -1,5 +1,7 @@
 "use strict";
 
+import { differenceInDays } from './node_modules/date-fns/differenceInDays/index.js'
+
 const jsonUrl = "https://jsondata.okiba.me/v1/json/Y3Att211012082350";
 const newsWrapper = document.getElementById("js-news");
 const tabUl = document.getElementById("js-news-tabs");
