@@ -73,7 +73,11 @@ const createNewContent = (newsUiItems) => {
       a.href = "#";
       titleFragment.appendChild(contentLi).appendChild(a);
 
-      article.new && creatNewLabel(contentLi);
+      const distanceDate = differenceInDays(
+        new Date(2021, 8, 14),
+        new Date(article.date)
+      );
+      distanceDate <= 3 && creatNewLabel(contentLi);
       article.comments > 0 && creatCommentIcon(contentLi);
     });
 
