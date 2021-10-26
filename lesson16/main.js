@@ -55,26 +55,26 @@ const createNewTab = (newsUiItems) => {
 };
 
 //news
-const createNewContent = (data) => {
+const createNewContent = (newsUiItems) => {
   const contentFragment = document.createDocumentFragment();
 
-  data.forEach((key, index) => {
+  newsUiItems.forEach((newsUiItem, index) => {
     const newsContent = createElementWithClassName("div", "news__content");
     const elementForFlex = createElementWithClassName("div", "flex");
     const contentUl = createElementWithClassName("ul", "js-news__lists");
     const titleFragment = document.createDocumentFragment();
-    const categoryName = key.id;
+    const categoryName = newsUiItem.category;
     newsContent.classList.add(`js-${categoryName}`);
 
-    key.article.forEach((array) => {
+    newsUiItem.articles.forEach((article) => {
       const contentLi = createElementWithClassName("li", "news__item");
       const a = document.createElement("a");
-      a.textContent = array.title;
+      a.textContent = article.title;
       a.href = "#";
       titleFragment.appendChild(contentLi).appendChild(a);
 
-      array.new && creatNewLabel(contentLi);
-      array.comments > 0 && creatCommentIcon(contentLi);
+      article.new && creatNewLabel(contentLi);
+      article.comments > 0 && creatCommentIcon(contentLi);
     });
 
     //とりあえず最初のインデックスをアクティブなタブとする
