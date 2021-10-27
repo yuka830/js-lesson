@@ -55,46 +55,50 @@ const createNewTab = (newsUiItems) => {
 };
 
 //news
-const createNewContent = (newsUiItems) => {
-  const contentFragment = document.createDocumentFragment();
+const createArticleTitles = ({ articles }) => {
+  const titleFragment = document.createDocumentFragment();
+  articles.forEach((article) => {
+    const contentLi = createElementWithClassName("li", "news__item");
+    const a = document.createElement("a");
+    a.textContent = article.title;
+    a.href = "#";
+    titleFragment.appendChild(contentLi).appendChild(a);
 
+    const distanceDate = differenceInDays(
+      new Date(2021, 8, 14),
+      new Date(article.date)
+    );
+    distanceDate <= 3 && creatNewLabel(contentLi);
+    article.comments > 0 && creatCommentIcon(contentLi);
+  });
+  return titleFragment;
+};
+
+const createContentsItem = (newsUiItems) => {
+  const contentFragment = document.createDocumentFragment();
   newsUiItems.forEach((newsUiItem, index) => {
     const newsContent = createElementWithClassName("div", "news__content");
     const elementForFlex = createElementWithClassName("div", "flex");
     const contentUl = createElementWithClassName("ul", "js-news__lists");
-    const titleFragment = document.createDocumentFragment();
     const categoryName = newsUiItem.category;
     newsContent.classList.add(`js-${categoryName}`);
-
-    newsUiItem.articles.forEach((article) => {
-      const contentLi = createElementWithClassName("li", "news__item");
-      const a = document.createElement("a");
-      a.textContent = article.title;
-      a.href = "#";
-      titleFragment.appendChild(contentLi).appendChild(a);
-
-      const distanceDate = differenceInDays(
-        new Date(2021, 8, 14),
-        new Date(article.date)
-      );
-      distanceDate <= 3 && creatNewLabel(contentLi);
-      article.comments > 0 && creatCommentIcon(contentLi);
-    });
-
     //とりあえず最初のインデックスをアクティブなタブとする
     index === 0 && newsContent.classList.add("is-show");
-
     creatNewsImg(elementForFlex, categoryName);
 
     contentFragment
       .appendChild(newsContent)
       .appendChild(elementForFlex)
       .appendChild(contentUl)
-      .appendChild(titleFragment);
+      .appendChild(createArticleTitles(newsUiItem));
   });
-
-  newsWrapper.appendChild(contentFragment);
+  return contentFragment;
 };
+
+//news
+const createNewContent = (newsUiItems) =>
+  newsWrapper.appendChild(createContentsItem(newsUiItems));
+
 
 //tabSwitch
 const tabSwitch = () => {
