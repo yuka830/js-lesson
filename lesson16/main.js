@@ -28,6 +28,13 @@ const creatNewLabel = (element) => {
   element.appendChild(newLabel);
 };
 
+//check days between today and posted date for new-label
+const isWithinSpecificDays = (date) => {
+  const newLavelPeriod = 3;
+  const distanceDate = differenceInDays(new Date(), new Date(date));
+  return distanceDate <= newLavelPeriod;
+};
+
 //news-img
 const creatNewsImg = (element, category) => {
   const imgWrapper = createElementWithClassName("div", "news__img");
@@ -64,11 +71,7 @@ const createArticleTitles = ({ articles }) => {
     a.href = "#";
     titleFragment.appendChild(contentLi).appendChild(a);
 
-    const distanceDate = differenceInDays(
-      new Date(2021, 8, 14),
-      new Date(article.date)
-    );
-    distanceDate <= 3 && creatNewLabel(contentLi);
+    isWithinSpecificDays(article.date) && creatNewLabel(contentLi);
     article.comments > 0 && creatCommentIcon(contentLi);
   });
   return titleFragment;
@@ -98,7 +101,6 @@ const createContentsItem = (newsUiItems) => {
 //news
 const createNewContent = (newsUiItems) =>
   newsWrapper.appendChild(createContentsItem(newsUiItems));
-
 
 //tabSwitch
 const tabSwitch = () => {
