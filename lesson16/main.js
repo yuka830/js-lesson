@@ -1,6 +1,8 @@
 "use strict";
 
-const jsonUrl = "https://jsondata.okiba.me/v1/json/BFwf7210926001715";
+import { differenceInDays } from "date-fns";
+
+const jsonUrl = "https://jsondata.okiba.me/v1/json/ifwSK211027002739";
 const newsWrapper = document.getElementById("js-news");
 const tabUl = document.getElementById("js-news-tabs");
 
@@ -11,26 +13,46 @@ const createElementWithClassName = (element, name) => {
 };
 
 //comment-icon
-const commentIcon = createElementWithClassName("span", "comment-icon");
+const creatCommentIcon = (element) => {
+  const commentSpan = createElementWithClassName("span", "comment-icon");
+  const commentImg = document.createElement("img");
+  commentImg.src = "./img/comment.png";
+  commentSpan.appendChild(commentImg);
+  element.appendChild(commentSpan);
+};
 
 //new-label
-const newLabel = createElementWithClassName("span", "new-label");
-newLabel.textContent = "NEW!";
+const creatNewLabel = (element) => {
+  const newLabel = createElementWithClassName("span", "new-label");
+  newLabel.textContent = "NEW!";
+  element.appendChild(newLabel);
+};
+
+//check days between today and posted date for new-label
+const isWithinSpecificDays = (date) => {
+  const newLavelPeriod = 3;
+  const distanceDate = differenceInDays(new Date(), new Date(date));
+  return distanceDate <= newLavelPeriod;
+};
 
 //news-img
-const imgWrapper = createElementWithClassName("div", "news__img");
+const creatNewsImg = (element, category) => {
+  const imgWrapper = createElementWithClassName("div", "news__img");
+  const newsImg = document.createElement("img");
+  newsImg.src = `./img/${category}.png`;
+  imgWrapper.appendChild(newsImg);
+  element.appendChild(imgWrapper);
+};
 
 //tab
-const createNewTab = (data) => {
+const createNewTab = (newsUiItems) => {
   const tabFragment = document.createDocumentFragment();
 
-  data.forEach((key,index) => {
+  newsUiItems.forEach((newsUiItem, index) => {
     const tabLi = createElementWithClassName("li", "tab");
-    tabLi.textContent = key.category;
-    tabLi.dataset.category= key.id;
-    if (index === 0) {
-      tabLi.classList.add("is-active");
-    }
+    tabLi.textContent = newsUiItem.category;
+    tabLi.dataset.category = newsUiItem.category;
+    index === 0 && tabLi.classList.add("is-active");
 
     tabLi.addEventListener("click", tabSwitch);
     tabFragment.appendChild(tabLi);
@@ -40,36 +62,45 @@ const createNewTab = (data) => {
 };
 
 //news
-const createNewContent = (data) => {
+const createArticleTitles = ({ articles }) => {
+  const titleFragment = document.createDocumentFragment();
+  articles.forEach((article) => {
+    const contentLi = createElementWithClassName("li", "news__item");
+    const a = document.createElement("a");
+    a.textContent = article.title;
+    a.href = "#";
+    titleFragment.appendChild(contentLi).appendChild(a);
+
+    isWithinSpecificDays(article.date) && creatNewLabel(contentLi);
+    article.comments > 0 && creatCommentIcon(contentLi);
+  });
+  return titleFragment;
+};
+
+const createContentsItem = (newsUiItems) => {
   const contentFragment = document.createDocumentFragment();
-
-  data.forEach((key,index) => {
+  newsUiItems.forEach((newsUiItem, index) => {
     const newsContent = createElementWithClassName("div", "news__content");
+    const elementForFlex = createElementWithClassName("div", "flex");
     const contentUl = createElementWithClassName("ul", "js-news__lists");
-    const titleFragment = document.createDocumentFragment();
-    const categoryName = key.id;
+    const categoryName = newsUiItem.category;
     newsContent.classList.add(`js-${categoryName}`);
+    //とりあえず最初のインデックスをアクティブなタブとする
+    index === 0 && newsContent.classList.add("is-show");
+    creatNewsImg(elementForFlex, categoryName);
 
-    key.article.forEach((array) => {
-      const contentLi = createElementWithClassName("li", "news__item");
-      const a = document.createElement("a");
-      a.textContent = array.title;
-      a.href = "#";
-      titleFragment.appendChild(contentLi).appendChild(a);
-    });
-
-    if (index === 0) {
-      //とりあえず最初のインデックスをアクティブなタブとする
-      newsContent.classList.add("is-show");
-    }
     contentFragment
       .appendChild(newsContent)
+      .appendChild(elementForFlex)
       .appendChild(contentUl)
-      .appendChild(titleFragment);
+      .appendChild(createArticleTitles(newsUiItem));
   });
-
-  newsWrapper.appendChild(contentFragment);
+  return contentFragment;
 };
+
+//news
+const createNewContent = (newsUiItems) =>
+  newsWrapper.appendChild(createContentsItem(newsUiItems));
 
 //tabSwitch
 const tabSwitch = () => {
@@ -111,9 +142,9 @@ const fetchedNewsComponentData = async () => {
 };
 
 const init = async () => {
-  const newsUiData = await fetchedNewsComponentData();
-  createNewTab(newsUiData);
-  createNewContent(newsUiData);
+  const newsUiItems = await fetchedNewsComponentData();
+  createNewTab(newsUiItems);
+  createNewContent(newsUiItems);
 };
 
 init();
