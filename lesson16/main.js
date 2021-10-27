@@ -2,7 +2,7 @@
 
 import { differenceInDays } from "date-fns";
 
-const jsonUrl = "https://jsondata.okiba.me/v1/json/Y3Att211012082350";
+const jsonUrl = "https://jsondata.okiba.me/v1/json/ifwSK211027002739";
 const newsWrapper = document.getElementById("js-news");
 const tabUl = document.getElementById("js-news-tabs");
 
