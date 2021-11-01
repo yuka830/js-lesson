@@ -36,7 +36,7 @@ const fetcheDataInSecond = (sec) => {
 };
 
 
-const fetcheImagesData = async () => {
+const fetcheImgData = async () => {
   try {
     const response = await fetcheDataInSecond(numOfSecond);
     const json = await response.json();
@@ -52,7 +52,7 @@ const fetcheImagesData = async () => {
 const init = async () => {
   createLoader();
   loading();
-  const imgData = await fetcheImagesData();
+  const imgData = await fetcheImgData();
   createListsOfImg(imgData);
 };
 
