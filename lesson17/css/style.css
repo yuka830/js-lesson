@@ -1,7 +1,7 @@
 .loading {
   position: fixed;
-  top: 0;
-  left: 0;
+  top: 45%;
+  left: 45%;
   z-index: 1;
 }
 
@@ -10,6 +10,42 @@
   visibility: hidden;
 }
 
-/* .is-show {
+.btn {
+  padding: 15px;
+  font-size: 20px;
+}
 
-} */
+.slideshow {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0; 
+  display: flex;
+  align-items: center;
+  margin: 0 auto;
+  width: 70%;
+}
+
+.slideshow__list {
+  position: relative;
+  width: 100%;
+  height: 300px;
+}
+.slideshow__img {
+  position: absolute;
+  padding: 10px;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: 320px;
+  height: 240px;
+  margin: auto;
+  z-index: 0;
+  display: none;
+}
+
+.is-show {
+  display: block;
+}

@@ -1,6 +1,6 @@
 const jsonUrl = "https://jsondata.okiba.me/v1/json/YbIZe211030061143";
-const wrapper = document.getElementById("js-wrapper");
-const ul = document.getElementById("js-slideshow");
+const wrapper = document.getElementById("js-slideshow");
+const ul = document.getElementById("js-img-list");
 const numOfSecond = 3;
 
 const createElementWithClassName = (element, name) => {
@@ -27,7 +27,7 @@ const loaded = () => {
   loader.classList.add("loaded");
 };
 
-const fetcheDataInSecond = (sec,jsonUrl) => {
+const fetcheDataInSecond = (sec, jsonUrl) => {
   return new Promise((resolve, reject) => {
     setTimeout(() => {
       resolve(fetch(jsonUrl));
@@ -35,10 +35,9 @@ const fetcheDataInSecond = (sec,jsonUrl) => {
   });
 };
 
-
 const fetcheImgData = async () => {
   try {
-    const response = await fetcheDataInSecond(numOfSecond,jsonUrl);
+    const response = await fetcheDataInSecond(numOfSecond, jsonUrl);
     const json = await response.json();
     return json.images;
   } catch (error) {
@@ -49,17 +48,10 @@ const fetcheImgData = async () => {
   }
 };
 
-const init = async () => {
-  createLoader();
-  loading();
-  const imgData = await fetcheImgData();
-  createListsOfImg(imgData);
-};
-
 const createListsOfImg = (imgData) => {
   const fragment = document.createDocumentFragment();
-  imgData.forEach((imgVal,index) => {
-    const li = createElementWithClassName("li","slideshow-img");
+  imgData.forEach((imgVal, index) => {
+    const li = createElementWithClassName("li", "slideshow__img");
     const img = document.createElement("img");
     img.src = imgVal.src;
 
@@ -67,9 +59,65 @@ const createListsOfImg = (imgData) => {
     index === 0 && li.classList.add("is-show");
 
     fragment.appendChild(li).appendChild(img);
-  })
-ul.appendChild(fragment);
-}
+  });
+  ul.appendChild(fragment);
+};
+
+const createArrowBtnForSlideshow = () => {
+  createNextBtn();
+  createBackBtn();
+};
+
+const createNextBtn = () => {
+  const nextBtn = createElementWithClassName("button", "btn");
+  nextBtn.id = "js-next-btn";
+  nextBtn.textContent = ">";
+  ul.insertAdjacentElement("afterend", nextBtn);
+  nextBtn.addEventListener(
+    "click",
+    () => {
+      goNext();
+    },
+    false
+  );
+};
+
+const createBackBtn = () => {
+  const backBtn = createElementWithClassName("button", "btn");
+  backBtn.id = "js-back-btn";
+  backBtn.textContent = "<";
+  ul.insertAdjacentElement("beforebegin", backBtn);
+  backBtn.addEventListener(
+    "click",
+    () => {
+      goBack();
+    },
+    false
+  );
+};
+
+const goNext = () => {
+  const currentImg = document.querySelector(".is-show");
+  if (currentImg.nextElementSibling) {
+    currentImg.classList.remove("is-show");
+    currentImg.nextElementSibling.classList.add("is-show");
+  }
+};
+
+const goBack = () => {
+  const currentImg = document.querySelector(".is-show");
+  if (currentImg.previousElementSibling) {
+    currentImg.classList.remove("is-show");
+    currentImg.previousElementSibling.classList.add("is-show");
+  }
+};
+
+const init = async () => {
+  createLoader();
+  loading();
+  const imgData = await fetcheImgData();
+  createListsOfImg(imgData);
+  createArrowBtnForSlideshow();
+};
 
 init();
-
