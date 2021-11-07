@@ -1,7 +1,6 @@
 const jsonUrl = "https://jsondata.okiba.me/v1/json/YbIZe211030061143";
 const slideshowWrap = document.getElementById("js-slideshow");
 const ul = document.getElementById("js-img-list");
-const numOfSecond = 3;
 
 const createElementWithClassName = (element, name) => {
   const createdElement = document.createElement(element);
@@ -27,11 +26,12 @@ const loaded = () => {
   loader.classList.add("loaded");
 };
 
+const numOfSecond = 3000;
 const fetcheDataInSecond = (sec, jsonUrl) => {
   return new Promise((resolve, reject) => {
     setTimeout(() => {
       resolve(fetch(jsonUrl));
-    }, sec * 1000);
+    }, sec);
   });
 };
 
