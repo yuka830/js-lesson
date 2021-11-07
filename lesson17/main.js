@@ -14,7 +14,7 @@ const createLoader = () => {
   const loaderImage = document.createElement("img");
   loader.id = "js-loader";
   loaderImage.src = "img/loading-circle.gif";
-  wrapper.appendChild(loader).appendChild(loaderImage);
+  slideshowWrap.appendChild(loader).appendChild(loaderImage);
 };
 
 const loading = () => {
@@ -41,7 +41,7 @@ const fetcheImgData = async () => {
     const json = await response.json();
     return json.images;
   } catch (error) {
-    wrapper.textContent = "データの取得ができませんでした。";
+    slideshowWrap.textContent = "データの取得ができませんでした。";
     console.error(error);
   } finally {
     loaded();
