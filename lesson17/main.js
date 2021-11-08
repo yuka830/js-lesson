@@ -26,7 +26,6 @@ const loaded = () => {
   loader.classList.add("loaded");
 };
 
-const numOfSecond = 3000;
 const fetcheDataInSecond = (sec, jsonUrl) => {
   return new Promise((resolve, reject) => {
     setTimeout(() => {
@@ -36,6 +35,7 @@ const fetcheDataInSecond = (sec, jsonUrl) => {
 };
 
 const fetcheImgData = async () => {
+  const numOfSecond = 3000;
   try {
     const response = await fetcheDataInSecond(numOfSecond, jsonUrl);
     const json = await response.json();
