@@ -115,9 +115,19 @@ const goBack = () => {
 const init = async () => {
   createLoader();
   loading();
-  const imgData = await fetcheImgData();
-  createListsOfImg(imgData);
-  createArrowBtnForSlideshow();
+  let imgData;
+  try {
+    imgData = await fetcheImgData();
+  } catch (e) {
+    console.error();
+  } finally {
+    console.log("処理が完了しました。");
+  }
+  if (imgData.length !== 0) {
+    createListsOfImg(imgData);
+    createArrowBtnForSlideshow();
+  } else {
+    slideshowWrap.textContent = "データがありません。"; 
+  }
 };
-
 init();
