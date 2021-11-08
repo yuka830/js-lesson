@@ -76,7 +76,7 @@ const createNextBtn = () => {
   nextBtn.addEventListener(
     "click",
     () => {
-      goNext();
+      imageSwitchButton("nextElementSibling");
     },
     false
   );
@@ -90,25 +90,17 @@ const createBackBtn = () => {
   backBtn.addEventListener(
     "click",
     () => {
-      goBack();
+      imageSwitchButton("previousElementSibling");
     },
     false
   );
 };
 
-const goNext = () => {
+const imageSwitchButton = (SwitchDirection) => {
   const currentImg = document.querySelector(".is-show");
-  if (currentImg.nextElementSibling) {
+  if (currentImg[SwitchDirection]) {
     currentImg.classList.remove("is-show");
-    currentImg.nextElementSibling.classList.add("is-show");
-  }
-};
-
-const goBack = () => {
-  const currentImg = document.querySelector(".is-show");
-  if (currentImg.previousElementSibling) {
-    currentImg.classList.remove("is-show");
-    currentImg.previousElementSibling.classList.add("is-show");
+    currentImg[SwitchDirection].classList.add("is-show");
   }
 };
 
