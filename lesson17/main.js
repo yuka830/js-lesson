@@ -111,7 +111,7 @@ const init = async () => {
   try {
     imgData = await fetcheImgData();
   } catch (e) {
-    console.error();
+    console.error(e);
   } finally {
     console.log("処理が完了しました。");
   }
