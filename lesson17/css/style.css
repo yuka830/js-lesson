@@ -21,11 +21,18 @@
   width: 70%;
 }
 
+@media screen and (max-width: 769px) {
+  .slideshow {
+    width: 100%;
+  }
+}
+
 .slideshow__list {
   position: relative;
   width: 100%;
   height: 300px;
 }
+
 .slideshow__img {
   position: absolute;
   padding: 10px;
