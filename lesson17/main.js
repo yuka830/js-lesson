@@ -77,7 +77,7 @@ const createNextBtn = () => {
   nextBtn.addEventListener(
     "click",
     () => {
-      imageSwitchButton("nextElementSibling");
+      switchImg("nextElementSibling");
       switchDisableForBtn();
       getCurrentPageNum();
     },
@@ -94,7 +94,7 @@ const createBackBtn = () => {
   backBtn.addEventListener(
     "click",
     () => {
-      imageSwitchButton("previousElementSibling");
+      switchImg("previousElementSibling");
       switchDisableForBtn();
       getCurrentPageNum();
     },
@@ -102,7 +102,7 @@ const createBackBtn = () => {
   );
 };
 
-const  imageSwitchButton = (SwitchDirection) => {
+const  switchImg = (SwitchDirection) => {
   const currentImg = document.querySelector(".is-show");
   if (currentImg[SwitchDirection]) {
     currentImg.classList.remove("is-show");
