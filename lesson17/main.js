@@ -1,6 +1,7 @@
 const jsonUrl = "https://jsondata.okiba.me/v1/json/YbIZe211030061143";
 const slideshowWrap = document.getElementById("js-slideshow");
 const ul = document.getElementById("js-img-list");
+let imgArray = [];
 
 const createElementWithClassName = (element, name) => {
   const createdElement = document.createElement(element);
@@ -77,6 +78,8 @@ const createNextBtn = () => {
     "click",
     () => {
       imageSwitchButton("nextElementSibling");
+      switchDisableForBtn();
+      getCurrentPageNum();
     },
     false
   );
@@ -86,22 +89,65 @@ const createBackBtn = () => {
   const backBtn = createElementWithClassName("button", "btn");
   backBtn.id = "js-back-btn";
   backBtn.textContent = "<";
+  backBtn.disabled = true;
   ul.insertAdjacentElement("beforebegin", backBtn);
   backBtn.addEventListener(
     "click",
     () => {
       imageSwitchButton("previousElementSibling");
+      switchDisableForBtn();
+      getCurrentPageNum();
     },
     false
   );
 };
 
-const imageSwitchButton = (SwitchDirection) => {
+const  imageSwitchButton = (SwitchDirection) => {
   const currentImg = document.querySelector(".is-show");
   if (currentImg[SwitchDirection]) {
     currentImg.classList.remove("is-show");
     currentImg[SwitchDirection].classList.add("is-show");
   }
+};
+
+const createArrayOfImgLists = () => {
+  const images = document.querySelectorAll(".slideshow__img");
+  const arrayOfImg = Array.from(images);
+  return (imgArray = arrayOfImg);
+};
+
+const getCurrentImgIndex = () => {
+  const isShowImg = document.querySelector(".is-show");
+  const currentImgIndex = imgArray.indexOf(isShowImg);
+  return currentImgIndex;
+};
+
+const switchDisableForBtn = () => {
+  const nextBtn = document.getElementById("js-next-btn");
+  const backBtn = document.getElementById("js-back-btn");
+
+  if (getCurrentImgIndex() === 0) {
+    backBtn.disabled = true;
+  } else {
+    backBtn.disabled = false;
+  }
+
+  if (getCurrentImgIndex() === imgArray.length - 1) {
+    nextBtn.disabled = true;
+  } else {
+    nextBtn.disabled = false;
+  }
+};
+
+const createPagination = () => {
+  const pagination = createElementWithClassName("p", "number-pagination");
+  slideshowWrap.insertAdjacentElement("afterend", pagination);
+  getCurrentPageNum();
+};
+
+const getCurrentPageNum = () => {
+  const pagination = document.querySelector(".number-pagination");
+  pagination.textContent = `${getCurrentImgIndex() + 1}/${imgArray.length}`;
 };
 
 const init = async () => {
@@ -117,9 +163,11 @@ const init = async () => {
   }
   if (imgData.length !== 0) {
     createListsOfImg(imgData);
+    createArrayOfImgLists();
     createArrowBtnForSlideshow();
+    createPagination();
   } else {
-    slideshowWrap.textContent = "データがありません。"; 
+    slideshowWrap.textContent = "データがありません。";
   }
 };
 init();
