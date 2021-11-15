@@ -41,9 +41,9 @@ const fetcheImgData = async () => {
     const response = await fetcheDataInSecond(numOfSecond, jsonUrl);
     const json = await response.json();
     return json.images;
-  } catch (error) {
+  } catch (e) {
     slideshowWrap.textContent = "データの取得ができませんでした。";
-    console.error(error);
+    console.error(e);
   } finally {
     loaded();
   }
