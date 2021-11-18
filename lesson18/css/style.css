@@ -1,0 +1,57 @@
+.loading {
+  position: fixed;
+  left: 45%;
+  z-index: 1;
+}
+
+.loaded {
+  opacity: 0;
+  visibility: hidden;
+}
+
+.btn {
+  padding: 15px;
+  font-size: 20px;
+}
+
+.slideshow {
+  display: flex;
+  align-items: center;
+  margin: 0 auto;
+  width: 70%;
+}
+
+@media screen and (max-width: 769px) {
+  .slideshow {
+    width: 100%;
+  }
+}
+
+.slideshow__list {
+  position: relative;
+  width: 100%;
+  height: 300px;
+}
+
+.slideshow__img {
+  position: absolute;
+  padding: 10px;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: 320px;
+  height: 240px;
+  margin: auto;
+  z-index: 0;
+  display: none;
+}
+
+.is-show {
+  display: block;
+}
+
+.number-pagination {
+  text-align: center;
+  font-size: 20px;
+}
