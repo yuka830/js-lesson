@@ -77,9 +77,7 @@ const createNextBtn = () => {
   nextBtn.addEventListener(
     "click",
     () => {
-      switchImg("nextElementSibling");
-      switchDisableForBtn();
-      getCurrentPageNum();
+      clickEvents("nextElementSibling");
     },
     false
   );
@@ -94,19 +92,32 @@ const createBackBtn = () => {
   backBtn.addEventListener(
     "click",
     () => {
-      switchImg("previousElementSibling");
-      switchDisableForBtn();
-      getCurrentPageNum();
+      clickEvents("previousElementSibling");
     },
     false
   );
 };
 
-const  switchImg = (SwitchDirection) => {
+const clickEvents = (SwitchDirection) => {
+  switchImgForbtn([SwitchDirection]);
+  switchDotForbtn([SwitchDirection]);
+  switchDisableForBtn();
+  getCurrentPageNum();
+};
+
+const switchImgForbtn = (SwitchDirection) => {
   const currentImg = document.querySelector(".is-show");
   if (currentImg[SwitchDirection]) {
     currentImg.classList.remove("is-show");
     currentImg[SwitchDirection].classList.add("is-show");
+  }
+};
+
+const switchDotForbtn = (SwitchDirection) => {
+  const currentDot = document.querySelector(".is-active");
+  if (currentDot[SwitchDirection]) {
+    currentDot.classList.remove("is-active");
+    currentDot[SwitchDirection].classList.add("is-active");
   }
 };
 
@@ -139,7 +150,7 @@ const switchDisableForBtn = () => {
   }
 };
 
-const createPagination = () => {
+const createNumPagination = () => {
   const pagination = createElementWithClassName("p", "number-pagination");
   slideshowWrap.insertAdjacentElement("afterend", pagination);
   getCurrentPageNum();
@@ -148,6 +159,43 @@ const createPagination = () => {
 const getCurrentPageNum = () => {
   const pagination = document.querySelector(".number-pagination");
   pagination.textContent = `${getCurrentImgIndex() + 1}/${imgArray.length}`;
+};
+
+const createDotPagination = () => {
+  const pagination = createElementWithClassName("div", "dot-pagination");
+  const fragment = document.createDocumentFragment();
+  for (let i = 0; i < imgArray.length; i++) {
+    const dot = createElementWithClassName("sapn", "dot");
+    //最初のインデックスをアクティブにする
+    i === 0 && dot.classList.add("is-active");
+    dot.addEventListener(
+      "click",
+      (e) => {
+        switchDot(e);
+        switchImgForDot(i);
+        switchDisableForBtn();
+        getCurrentPageNum();
+      },
+      false
+    );
+    fragment.appendChild(dot);
+  }
+  pagination.appendChild(fragment);
+  slideshowWrap.insertAdjacentElement("afterend", pagination);
+};
+
+const switchDot = (e) => {
+  const activeDot = document.querySelector(".is-active");
+  const targetDot = e.target;
+  activeDot.classList.remove("is-active");
+  targetDot.classList.add("is-active");
+};
+
+const switchImgForDot = (index) => {
+  const currentImg = document.querySelector(".is-show");
+  const indexOfTargetDot = index;
+  currentImg.classList.remove("is-show");
+  imgArray[indexOfTargetDot].classList.add("is-show");
 };
 
 const init = async () => {
@@ -165,7 +213,8 @@ const init = async () => {
     createListsOfImg(imgData);
     createArrayOfImgLists();
     createArrowBtnForSlideshow();
-    createPagination();
+    createNumPagination();
+    createDotPagination();
   } else {
     slideshowWrap.textContent = "データがありません。";
   }
