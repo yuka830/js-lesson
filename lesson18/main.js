@@ -171,10 +171,7 @@ const createDotPagination = () => {
     dot.addEventListener(
       "click",
       (e) => {
-        switchDot(e);
-        switchImgForDot(i);
-        switchDisableForBtn();
-        getCurrentPageNum();
+        clickDotEvents(e, i);
       },
       false
     );
@@ -182,6 +179,13 @@ const createDotPagination = () => {
   }
   pagination.appendChild(fragment);
   slideshowWrap.insertAdjacentElement("afterend", pagination);
+};
+
+const clickDotEvents = (e, i) => {
+  switchDot(e);
+  switchImgForDot(i);
+  switchDisableForBtn();
+  getCurrentPageNum();
 };
 
 const switchDot = (e) => {
