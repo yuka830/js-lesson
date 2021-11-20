@@ -99,13 +99,13 @@ const createBackBtn = () => {
 };
 
 const clickEvents = (SwitchDirection) => {
-  switchImgForbtn([SwitchDirection]);
-  switchDotForbtn([SwitchDirection]);
+  switchImgForBtn([SwitchDirection]);
+  switchDotForBtn([SwitchDirection]);
   switchDisableForBtn();
   getCurrentPageNum();
 };
 
-const switchImgForbtn = (SwitchDirection) => {
+const switchImgForBtn = (SwitchDirection) => {
   const currentImg = document.querySelector(".is-show");
   if (currentImg[SwitchDirection]) {
     currentImg.classList.remove("is-show");
@@ -113,7 +113,7 @@ const switchImgForbtn = (SwitchDirection) => {
   }
 };
 
-const switchDotForbtn = (SwitchDirection) => {
+const switchDotForBtn = (SwitchDirection) => {
   const currentDot = document.querySelector(".is-active");
   if (currentDot[SwitchDirection]) {
     currentDot.classList.remove("is-active");
