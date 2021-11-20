@@ -77,7 +77,7 @@ const createNextBtn = () => {
   nextBtn.addEventListener(
     "click",
     () => {
-      clickEvents("nextElementSibling");
+      clickBtnEvents("nextElementSibling");
     },
     false
   );
@@ -92,13 +92,13 @@ const createBackBtn = () => {
   backBtn.addEventListener(
     "click",
     () => {
-      clickEvents("previousElementSibling");
+      clickBtnEvents("previousElementSibling");
     },
     false
   );
 };
 
-const clickEvents = (SwitchDirection) => {
+const clickBtnEvents = (SwitchDirection) => {
   switchImgForBtn([SwitchDirection]);
   switchDotForBtn([SwitchDirection]);
   switchDisableForBtn();
