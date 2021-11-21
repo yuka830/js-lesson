@@ -114,10 +114,10 @@ const switchImgForBtn = (switchDirection) => {
 };
 
 const changeIndicator = (switchDirection) => {
-  const currentDot = document.querySelector(".is-active");
-  if (currentDot[switchDirection]) {
-    currentDot.classList.remove("is-active");
-    currentDot[switchDirection].classList.add("is-active");
+  const currentIndicator = document.querySelector(".is-active");
+  if (currentIndicator[switchDirection]) {
+    currentIndicator.classList.remove("is-active");
+    currentIndicator[switchDirection].classList.add("is-active");
   }
 };
 
@@ -161,45 +161,45 @@ const getCurrentPageNum = () => {
   pagination.textContent = `${getCurrentImgIndex() + 1}/${images.length}`;
 };
 
-const createDotPagination = () => {
-  const pagination = createElementWithClassName("div", "dot-pagination");
+const createIndicator = () => {
+  const pagination = createElementWithClassName("div", "indicators");
   const fragment = document.createDocumentFragment();
   for (let i = 0; i < images.length; i++) {
-    const dot = createElementWithClassName("sapn", "dot");
+    const indicator = createElementWithClassName("sapn", "indicator");
     //最初のインデックスをアクティブにする
-    i === 0 && dot.classList.add("is-active");
-    dot.addEventListener(
+    i === 0 && indicator.classList.add("is-active");
+    indicator.addEventListener(
       "click",
       (e) => {
-        clickDotEvents(e, i);
+        clickIndicatorEvents(e, i);
       },
       false
     );
-    fragment.appendChild(dot);
+    fragment.appendChild(indicator);
   }
   pagination.appendChild(fragment);
   slideshowWrap.insertAdjacentElement("afterend", pagination);
 };
 
-const clickDotEvents = (e, i) => {
-  switchDot(e);
-  switchImgForDot(i);
+const clickIndicatorEvents = (e, i) => {
+  switchActiveIndicator(e);
+  switchImgForIndicator(i);
   switchDisableForBtn();
   getCurrentPageNum();
 };
 
-const switchDot = (e) => {
-  const activeDot = document.querySelector(".is-active");
-  const targetDot = e.target;
-  activeDot.classList.remove("is-active");
-  targetDot.classList.add("is-active");
+const switchActiveIndicator = (e) => {
+  const activeIndicator = document.querySelector(".is-active");
+  const targetIndicator = e.target;
+  activeIndicator.classList.remove("is-active");
+  targetIndicator.classList.add("is-active");
 };
 
-const switchImgForDot = (index) => {
+const switchImgForIndicator = (index) => {
   const currentImg = document.querySelector(".is-show");
-  const indexOfTargetDot = index;
+  const indexOfTargetIndicator = index;
   currentImg.classList.remove("is-show");
-  images[indexOfTargetDot].classList.add("is-show");
+  images[indexOfTargetIndicator].classList.add("is-show");
 };
 
 const init = async () => {
@@ -218,7 +218,7 @@ const init = async () => {
     createArrayOfImgLists();
     createArrowBtnForSlideshow();
     createNumPagination();
-    createDotPagination();
+    createIndicator();
   } else {
     slideshowWrap.textContent = "データがありません。";
   }
