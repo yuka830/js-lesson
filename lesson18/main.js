@@ -100,7 +100,7 @@ const createBackBtn = () => {
 
 const clickBtnEvents = (switchDirection) => {
   switchImgForBtn(switchDirection);
-  switchDotForBtn(switchDirection);
+  changeIndicator(switchDirection);
   switchDisableForBtn();
   getCurrentPageNum();
 };
@@ -113,7 +113,7 @@ const switchImgForBtn = (switchDirection) => {
   }
 };
 
-const switchDotForBtn = (switchDirection) => {
+const changeIndicator = (switchDirection) => {
   const currentDot = document.querySelector(".is-active");
   if (currentDot[switchDirection]) {
     currentDot.classList.remove("is-active");
