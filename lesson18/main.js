@@ -42,6 +42,7 @@ const fetcheImgData = async () => {
     const json = await response.json();
     return json.images;
   } catch (e) {
+    slideshowWrap.style.margin = 0;
     slideshowWrap.textContent = "データの取得ができませんでした。";
     console.error(e);
   } finally {
@@ -220,6 +221,7 @@ const init = async () => {
     createNumPagination();
     createIndicator();
   } else {
+    slideshowWrap.style.margin = 0;
     slideshowWrap.textContent = "データがありません。";
   }
 };
