@@ -162,6 +162,11 @@ const getCurrentPageNum = () => {
   pagination.textContent = `${getCurrentImgIndex() + 1}/${images.length}`;
 };
 
+const createIndicatorForSlideshow = () => {
+  createIndicator();
+  addEventToIndicator();
+};
+
 const createIndicator = () => {
   const pagination = createElementWithClassName("div", "indicators");
   const fragment = document.createDocumentFragment();
@@ -169,22 +174,26 @@ const createIndicator = () => {
     const indicator = createElementWithClassName("sapn", "indicator");
     //最初のインデックスをアクティブにする
     i === 0 && indicator.classList.add("is-active");
-    indicator.addEventListener(
-      "click",
-      (e) => {
-        clickIndicatorEvents(e, i);
-      },
-      false
-    );
     fragment.appendChild(indicator);
   }
   pagination.appendChild(fragment);
   slideshowWrap.insertAdjacentElement("afterend", pagination);
 };
 
-const clickIndicatorEvents = (e, i) => {
+const addEventToIndicator = () => {
+  const indicator = document.querySelector(".indicators");
+  indicator.addEventListener(
+    "click",
+    (e) => {
+      clickIndicatorEvents(e);
+    },
+    false
+  );
+};
+
+const clickIndicatorEvents = (e) => {
   switchActiveIndicator(e);
-  switchImgForIndicator(i);
+  switchImgForIndicator(e);
   switchDisableForBtn();
   getCurrentPageNum();
 };
@@ -196,11 +205,20 @@ const switchActiveIndicator = (e) => {
   targetIndicator.classList.add("is-active");
 };
 
-const switchImgForIndicator = (index) => {
+const switchImgForIndicator = (e) => {
   const currentImg = document.querySelector(".is-show");
-  const indexOfTargetIndicator = index;
+  const targetIndicator = e.target;
+  const indexOfTargetIndicator = createArrayOfIndicators().indexOf(
+    targetIndicator
+  );
   currentImg.classList.remove("is-show");
   images[indexOfTargetIndicator].classList.add("is-show");
+};
+
+const createArrayOfIndicators = () => {
+  const indicator = document.querySelectorAll(".indicator");
+  const arrayOfIndicator = Array.from(indicator);
+  return arrayOfIndicator;
 };
 
 const init = async () => {
@@ -219,9 +237,8 @@ const init = async () => {
     createArrayOfImgLists();
     createArrowBtnForSlideshow();
     createNumPagination();
-    createIndicator();
+    createIndicatorForSlideshow();
   } else {
-    slideshowWrap.style.margin = 0;
     slideshowWrap.textContent = "データがありません。";
   }
 };
