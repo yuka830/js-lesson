@@ -98,26 +98,26 @@ const createBackBtn = () => {
   );
 };
 
-const clickBtnEvents = (SwitchDirection) => {
-  switchImgForBtn([SwitchDirection]);
-  switchDotForBtn([SwitchDirection]);
+const clickBtnEvents = (switchDirection) => {
+  switchImgForBtn(switchDirection);
+  switchDotForBtn(switchDirection);
   switchDisableForBtn();
   getCurrentPageNum();
 };
 
-const switchImgForBtn = (SwitchDirection) => {
+const switchImgForBtn = (switchDirection) => {
   const currentImg = document.querySelector(".is-show");
-  if (currentImg[SwitchDirection]) {
+  if (currentImg[switchDirection]) {
     currentImg.classList.remove("is-show");
-    currentImg[SwitchDirection].classList.add("is-show");
+    currentImg[switchDirection].classList.add("is-show");
   }
 };
 
-const switchDotForBtn = (SwitchDirection) => {
+const switchDotForBtn = (switchDirection) => {
   const currentDot = document.querySelector(".is-active");
-  if (currentDot[SwitchDirection]) {
+  if (currentDot[switchDirection]) {
     currentDot.classList.remove("is-active");
-    currentDot[SwitchDirection].classList.add("is-active");
+    currentDot[switchDirection].classList.add("is-active");
   }
 };
 
