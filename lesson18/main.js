@@ -1,7 +1,7 @@
 const jsonUrl = "https://jsondata.okiba.me/v1/json/YbIZe211030061143";
 const slideshowWrap = document.getElementById("js-slideshow");
 const ul = document.getElementById("js-img-list");
-let imgArray = [];
+let images = [];
 
 const createElementWithClassName = (element, name) => {
   const createdElement = document.createElement(element);
@@ -122,14 +122,14 @@ const changeIndicator = (switchDirection) => {
 };
 
 const createArrayOfImgLists = () => {
-  const images = document.querySelectorAll(".slideshow__img");
-  const arrayOfImg = Array.from(images);
-  return (imgArray = arrayOfImg);
+  const imgLists = document.querySelectorAll(".slideshow__img");
+  const arrayOfImg = Array.from(imgLists);
+  return (images = arrayOfImg);
 };
 
 const getCurrentImgIndex = () => {
   const isShowImg = document.querySelector(".is-show");
-  const currentImgIndex = imgArray.indexOf(isShowImg);
+  const currentImgIndex = images.indexOf(isShowImg);
   return currentImgIndex;
 };
 
@@ -143,7 +143,7 @@ const switchDisableForBtn = () => {
     backBtn.disabled = false;
   }
 
-  if (getCurrentImgIndex() === imgArray.length - 1) {
+  if (getCurrentImgIndex() === images.length - 1) {
     nextBtn.disabled = true;
   } else {
     nextBtn.disabled = false;
@@ -158,13 +158,13 @@ const createNumPagination = () => {
 
 const getCurrentPageNum = () => {
   const pagination = document.querySelector(".number-pagination");
-  pagination.textContent = `${getCurrentImgIndex() + 1}/${imgArray.length}`;
+  pagination.textContent = `${getCurrentImgIndex() + 1}/${images.length}`;
 };
 
 const createDotPagination = () => {
   const pagination = createElementWithClassName("div", "dot-pagination");
   const fragment = document.createDocumentFragment();
-  for (let i = 0; i < imgArray.length; i++) {
+  for (let i = 0; i < images.length; i++) {
     const dot = createElementWithClassName("sapn", "dot");
     //最初のインデックスをアクティブにする
     i === 0 && dot.classList.add("is-active");
@@ -199,7 +199,7 @@ const switchImgForDot = (index) => {
   const currentImg = document.querySelector(".is-show");
   const indexOfTargetDot = index;
   currentImg.classList.remove("is-show");
-  imgArray[indexOfTargetDot].classList.add("is-show");
+  images[indexOfTargetDot].classList.add("is-show");
 };
 
 const init = async () => {
