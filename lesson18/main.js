@@ -67,7 +67,9 @@ const createListsOfImg = (imgData) => {
 
 const createArrowBtnForSlideshow = () => {
   createNextBtn();
+  addEventToBtn("nextElementSibling", "js-next-btn");
   createBackBtn();
+  addEventToBtn("previousElementSibling", "js-back-btn");
 };
 
 const createNextBtn = () => {
@@ -75,13 +77,6 @@ const createNextBtn = () => {
   nextBtn.id = "js-next-btn";
   nextBtn.textContent = ">";
   ul.insertAdjacentElement("afterend", nextBtn);
-  nextBtn.addEventListener(
-    "click",
-    () => {
-      clickBtnEvents("nextElementSibling");
-    },
-    false
-  );
 };
 
 const createBackBtn = () => {
@@ -90,13 +85,11 @@ const createBackBtn = () => {
   backBtn.textContent = "<";
   backBtn.disabled = true;
   ul.insertAdjacentElement("beforebegin", backBtn);
-  backBtn.addEventListener(
-    "click",
-    () => {
-      clickBtnEvents("previousElementSibling");
-    },
-    false
-  );
+};
+
+const addEventToBtn = (direction, id) => {
+  const btn = document.getElementById(id);
+  btn.addEventListener("click", () => clickBtnEvents(direction), false);
 };
 
 const clickBtnEvents = (switchDirection) => {
