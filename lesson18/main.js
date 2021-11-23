@@ -1,4 +1,4 @@
-const jsonUrl = "https://jsondata.okiba.me/v1/json/YbIZe211030061143";
+const jsonUrl = "https://myjson.dit.upm.es/api/bins/c41j";
 const slideshowWrap = document.getElementById("js-slideshow");
 const ul = document.getElementById("js-img-list");
 let images = [];
