@@ -182,13 +182,7 @@ const createIndicator = () => {
 
 const addEventToIndicator = () => {
   const indicator = document.querySelector(".indicators");
-  indicator.addEventListener(
-    "click",
-    (e) => {
-      clickIndicatorEvents(e);
-    },
-    false
-  );
+  indicator.addEventListener("click", (e) => clickIndicatorEvents(e), false);
 };
 
 const clickIndicatorEvents = (e) => {
@@ -208,9 +202,8 @@ const switchActiveIndicator = (e) => {
 const switchImgForIndicator = (e) => {
   const currentImg = document.querySelector(".is-show");
   const targetIndicator = e.target;
-  const indexOfTargetIndicator = createArrayOfIndicators().indexOf(
-    targetIndicator
-  );
+  const indexOfTargetIndicator =
+    createArrayOfIndicators().indexOf(targetIndicator);
   currentImg.classList.remove("is-show");
   images[indexOfTargetIndicator].classList.add("is-show");
 };
