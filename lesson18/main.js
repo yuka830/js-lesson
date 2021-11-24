@@ -9,7 +9,7 @@ const createElementWithClassName = (element, name) => {
   return createdElement;
 };
 
-const createLoader = () => {
+const renderLoader = () => {
   const loader = document.createElement("div");
   const loaderImage = document.createElement("img");
   loader.id = "js-loader";
@@ -50,7 +50,7 @@ const fetcheImgData = async () => {
   }
 };
 
-const createListsOfImg = (imgData) => {
+const renderListsOfImg = (imgData) => {
   const fragment = document.createDocumentFragment();
   imgData.forEach((imgVal, index) => {
     const li = createElementWithClassName("li", "slideshow__img");
@@ -65,21 +65,21 @@ const createListsOfImg = (imgData) => {
   ul.appendChild(fragment);
 };
 
-const createArrowBtnForSlideshow = () => {
-  createNextBtn();
+const renderArrowBtnForSlideshow = () => {
+  renderNextBtn();
   addEventToBtn("nextElementSibling", "js-next-btn");
-  createBackBtn();
+  renderBackBtn();
   addEventToBtn("previousElementSibling", "js-back-btn");
 };
 
-const createNextBtn = () => {
+const renderNextBtn = () => {
   const nextBtn = createElementWithClassName("button", "btn");
   nextBtn.id = "js-next-btn";
   nextBtn.textContent = ">";
   ul.insertAdjacentElement("afterend", nextBtn);
 };
 
-const createBackBtn = () => {
+const renderBackBtn = () => {
   const backBtn = createElementWithClassName("button", "btn");
   backBtn.id = "js-back-btn";
   backBtn.textContent = "<";
@@ -144,7 +144,7 @@ const switchDisableForBtn = () => {
   }
 };
 
-const createNumPagination = () => {
+const renderNumPagination = () => {
   const pagination = createElementWithClassName("p", "number-pagination");
   slideshowWrap.insertAdjacentElement("afterend", pagination);
   getCurrentPageNum();
@@ -155,12 +155,12 @@ const getCurrentPageNum = () => {
   pagination.textContent = `${getCurrentImgIndex() + 1}/${images.length}`;
 };
 
-const createIndicatorForSlideshow = () => {
-  createIndicator();
+const renderIndicatorForSlideshow = () => {
+  renderIndicator();
   addEventToIndicator();
 };
 
-const createIndicator = () => {
+const renderIndicator = () => {
   const pagination = createElementWithClassName("div", "indicators");
   const fragment = document.createDocumentFragment();
   for (let i = 0; i < images.length; i++) {
@@ -208,7 +208,7 @@ const createArrayOfIndicators = () => {
 };
 
 const init = async () => {
-  createLoader();
+  renderLoader();
   loading();
   let imgData;
   try {
@@ -219,11 +219,11 @@ const init = async () => {
     console.log("処理が完了しました。");
   }
   if (imgData.length !== 0) {
-    createListsOfImg(imgData);
+    renderListsOfImg(imgData);
     createArrayOfImgLists();
-    createArrowBtnForSlideshow();
-    createNumPagination();
-    createIndicatorForSlideshow();
+    renderArrowBtnForSlideshow();
+    renderNumPagination();
+    renderIndicatorForSlideshow();
   } else {
     slideshowWrap.textContent = "データがありません。";
   }
