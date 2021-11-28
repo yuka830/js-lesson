@@ -164,7 +164,7 @@ const renderIndicator = () => {
   const pagination = createElementWithClassName("div", "indicators");
   const fragment = document.createDocumentFragment();
   for (let i = 0; i < images.length; i++) {
-    const indicator = createElementWithClassName("sapn", "indicator");
+    const indicator = createElementWithClassName("span", "indicator");
     //最初のインデックスをアクティブにする
     i === 0 && indicator.classList.add("is-active");
     fragment.appendChild(indicator);
@@ -197,8 +197,10 @@ const switchImgForIndicator = (e) => {
   const targetIndicator = e.target;
   const indexOfTargetIndicator =
     createArrayOfIndicators().indexOf(targetIndicator);
-  currentImg.classList.remove("is-show");
-  images[indexOfTargetIndicator].classList.add("is-show");
+  if(images[indexOfTargetIndicator]){
+    currentImg.classList.remove("is-show");
+    images[indexOfTargetIndicator].classList.add("is-show");
+  }
 };
 
 const createArrayOfIndicators = () => {
