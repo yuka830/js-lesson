@@ -197,9 +197,13 @@ const switchImgForIndicator = (e) => {
   const targetIndicator = e.target;
   const indexOfTargetIndicator =
     createArrayOfIndicators().indexOf(targetIndicator);
-  if(images[indexOfTargetIndicator]){
+    //子要素indicatorをクリックしたらその要素をアクティブにし、親要素をクリックした場合はなにもしない
+  const isClickedTargetElement = (index) => index !== -1;
+  if (isClickedTargetElement(indexOfTargetIndicator)) {
     currentImg.classList.remove("is-show");
     images[indexOfTargetIndicator].classList.add("is-show");
+  } else {
+    return;
   }
 };
 
