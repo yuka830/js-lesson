@@ -192,13 +192,14 @@ const switchActiveIndicator = (e) => {
   targetIndicator.classList.add("is-active");
 };
 
+const isClickedTargetElement = (index) => index !== -1;
+
 const switchImgForIndicator = (e) => {
   const currentImg = document.querySelector(".is-show");
   const targetIndicator = e.target;
   const indexOfTargetIndicator =
     createArrayOfIndicators().indexOf(targetIndicator);
     //子要素indicatorをクリックしたらその要素をアクティブにし、親要素をクリックした場合はなにもしない
-  const isClickedTargetElement = (index) => index !== -1;
   if (isClickedTargetElement(indexOfTargetIndicator)) {
     currentImg.classList.remove("is-show");
     images[indexOfTargetIndicator].classList.add("is-show");
