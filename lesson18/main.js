@@ -2,6 +2,8 @@ const jsonUrl = "https://myjson.dit.upm.es/api/bins/c41j";
 const slideshowWrap = document.getElementById("js-slideshow");
 const ul = document.getElementById("js-img-list");
 let images = [];
+let indicators = [];
+let autoPlay;
 
 const createElementWithClassName = (element, name) => {
   const createdElement = document.createElement(element);
@@ -93,6 +95,8 @@ const addEventToBtn = (direction, id) => {
 };
 
 const clickBtnEvents = (switchDirection) => {
+  stopAutoPlay();
+  startAutoPlay();
   switchImgForBtn(switchDirection);
   changeIndicator(switchDirection);
   switchDisableForBtn();
@@ -179,6 +183,8 @@ const addEventToIndicator = () => {
 };
 
 const clickIndicatorEvents = (e) => {
+  stopAutoPlay();
+  startAutoPlay();
   switchActiveIndicator(e);
   switchImgForIndicator(e);
   switchDisableForBtn();
@@ -197,9 +203,8 @@ const isClickedTargetElement = (index) => index !== -1;
 const switchImgForIndicator = (e) => {
   const currentImg = document.querySelector(".is-show");
   const targetIndicator = e.target;
-  const indexOfTargetIndicator =
-    createArrayOfIndicators().indexOf(targetIndicator);
-    //子要素indicatorをクリックしたらその要素をアクティブにし、親要素をクリックした場合はなにもしない
+  const indexOfTargetIndicator = indicators.indexOf(targetIndicator);
+  //子要素indicatorをクリックしたらその要素をアクティブにし、親要素をクリックした場合はなにもしない
   if (isClickedTargetElement(indexOfTargetIndicator)) {
     currentImg.classList.remove("is-show");
     images[indexOfTargetIndicator].classList.add("is-show");
@@ -211,7 +216,42 @@ const switchImgForIndicator = (e) => {
 const createArrayOfIndicators = () => {
   const indicator = document.querySelectorAll(".indicator");
   const arrayOfIndicator = Array.from(indicator);
-  return arrayOfIndicator;
+  return (indicators = arrayOfIndicator);
+};
+
+const startAutoPlay = () => {
+  autoPlay = setInterval(() => {
+    const currentImg = document.querySelector(".is-show");
+    const activeIndicator = document.querySelector(".is-active");
+    if (getCurrentImgIndex() === images.length - 1) {
+      deactivateImgAndIndicator(currentImg, activeIndicator);
+      activateFirstImgAndIndicator(images, indicators);
+    } else {
+      deactivateImgAndIndicator(currentImg, activeIndicator);
+      activateNextImgAndIndicator(currentImg, activeIndicator);
+    }
+    getCurrentPageNum();
+    switchDisableForBtn();
+  }, 3000);
+};
+
+const deactivateImgAndIndicator = (img, indicator) => {
+  img.classList.remove("is-show");
+  indicator.classList.remove("is-active");
+};
+
+const activateFirstImgAndIndicator = (images, indicators) => {
+  images[0].classList.add("is-show");
+  indicators[0].classList.add("is-active");
+};
+
+const activateNextImgAndIndicator = (img, indicator) => {
+  img.nextElementSibling.classList.add("is-show");
+  indicator.nextElementSibling.classList.add("is-active");
+};
+
+const stopAutoPlay = () => {
+  clearInterval(autoPlay);
 };
 
 const init = async () => {
@@ -231,6 +271,8 @@ const init = async () => {
     renderArrowBtnForSlideshow();
     renderNumPagination();
     renderIndicatorForSlideshow();
+    createArrayOfIndicators();
+    startAutoPlay();
   } else {
     slideshowWrap.textContent = "データがありません。";
   }
