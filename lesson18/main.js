@@ -265,16 +265,16 @@ const init = async () => {
   } finally {
     console.log("処理が完了しました。");
   }
-  if (imgData.length !== 0) {
-    renderListsOfImg(imgData);
-    createArrayOfImgLists();
-    renderArrowBtnForSlideshow();
-    renderNumPagination();
-    renderIndicatorForSlideshow();
-    createArrayOfIndicators();
-    startAutoPlay();
-  } else {
+  if (imgData.length === 0) {
     slideshowWrap.textContent = "データがありません。";
+    return;
   }
+  renderListsOfImg(imgData);
+  createArrayOfImgLists();
+  renderArrowBtnForSlideshow();
+  renderNumPagination();
+  renderIndicatorForSlideshow();
+  createArrayOfIndicators();
+  startAutoPlay();
 };
 init();
