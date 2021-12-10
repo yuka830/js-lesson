@@ -166,6 +166,7 @@ const renderIndicatorForSlideshow = () => {
 
 const renderIndicator = () => {
   const pagination = createElementWithClassName("div", "indicators");
+  pagination.id = "pagination";
   const fragment = document.createDocumentFragment();
   for (let i = 0; i < images.length; i++) {
     const indicator = createElementWithClassName("span", "indicator");
@@ -183,6 +184,11 @@ const addEventToIndicator = () => {
 };
 
 const clickIndicatorEvents = (e) => {
+  const parent = document.getElementById("pagination");
+  //クリックしたのが親要素だったら何もしない
+  if (e.target === parent) {
+    return;
+  }
   stopAutoPlay();
   startAutoPlay();
   switchActiveIndicator(e);
@@ -198,19 +204,12 @@ const switchActiveIndicator = (e) => {
   targetIndicator.classList.add("is-active");
 };
 
-const isClickedTargetElement = (index) => index !== -1;
-
 const switchImgForIndicator = (e) => {
   const currentImg = document.querySelector(".is-show");
   const targetIndicator = e.target;
   const indexOfTargetIndicator = indicators.indexOf(targetIndicator);
-  //子要素indicatorをクリックしたらその要素をアクティブにし、親要素をクリックした場合はなにもしない
-  if (isClickedTargetElement(indexOfTargetIndicator)) {
-    currentImg.classList.remove("is-show");
-    images[indexOfTargetIndicator].classList.add("is-show");
-  } else {
-    return;
-  }
+  currentImg.classList.remove("is-show");
+  images[indexOfTargetIndicator].classList.add("is-show");
 };
 
 const createArrayOfIndicators = () => {
