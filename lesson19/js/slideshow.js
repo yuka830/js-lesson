@@ -59,7 +59,7 @@ const renderListsOfImg = (imgData) => {
     const img = document.createElement("img");
     img.src = imgVal.src;
 
-    //とりあえず最初のインデックスを表示
+    //とりあえず最初のインデックスを表示 
     index === 0 && li.classList.add("is-show");
 
     fragment.appendChild(li).appendChild(img);
