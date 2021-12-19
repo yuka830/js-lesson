@@ -83,7 +83,7 @@ const createContentsItem = (newsUiItems) => {
     const contentUl = createElementWithClassName("ul", "js-news__lists");
     const categoryName = newsUiItem.category;
     newsContent.classList.add(`js-${categoryName}`);
-    //とりあえず最初のインデックスをアクティブなタブとする
+    //とりあえず最初のインデックスをアクティブなタブとする 
     index === 0 && newsContent.classList.add("is-show");
     creatNewsImg(elementForFlex, categoryName);
 
