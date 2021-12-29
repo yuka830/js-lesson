@@ -1,0 +1,29 @@
+.loading {
+  position: fixed;
+  z-index: 1;
+}
+
+.loaded {
+  opacity: 0;
+  visibility: hidden;
+}
+
+.users-table {
+  text-align: center;
+  margin: 15px;
+}
+
+.users-table__th,
+.users-table__td {
+  border: solid 1px black;
+}
+
+.users-table__th {
+  padding: 10px;
+  background-color: #ead3d1;
+  font-weight: 700;
+}
+
+.users-table__td {
+  padding: 10px;
+}
