@@ -1,4 +1,3 @@
-
 const jsonUrl = "https://myjson.dit.upm.es/api/bins/4qxd";
 const tableWrap = document.getElementById("js-table-wrapper");
 
@@ -66,8 +65,9 @@ const createTableHeader = (usersData) => {
   const fragment = document.createDocumentFragment();
   for (let key in usersData[0]) {
     const th = createElementWithClassName("th", "users-table__th");
-    th.textContent = key;
-    key === "id" && (th.textContent = key.toUpperCase());
+    key === "id"
+      ? (th.textContent = key.toUpperCase())
+      : (th.textContent = key);
     fragment.appendChild(th);
   }
   trOfThead.appendChild(fragment);
