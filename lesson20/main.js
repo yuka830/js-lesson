@@ -26,7 +26,7 @@ const loaded = () => {
   loader.classList.add("loaded");
 };
 
-const fetcheDataInSecond = (sec, jsonUrl) => {
+const fetchDataInSecond = (sec, jsonUrl) => {
   return new Promise((resolve, reject) => {
     setTimeout(() => {
       resolve(fetch(jsonUrl));
@@ -34,9 +34,9 @@ const fetcheDataInSecond = (sec, jsonUrl) => {
   });
 };
 
-const fetchePersonalData = async () => {
+const fetchPersonalData = async () => {
   try {
-    const response = await fetcheDataInSecond(3000, jsonUrl);
+    const response = await fetchDataInSecond(3000, jsonUrl);
     const json = await response.json();
     return json.data;
   } catch (e) {
@@ -93,7 +93,7 @@ const init = async () => {
   loading();
   let usersData;
   try {
-    usersData = await fetchePersonalData();
+    usersData = await fetchPersonalData();
   } catch (e) {
     console.error(e);
   } finally {
