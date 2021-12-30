@@ -65,9 +65,7 @@ const createTableHeader = (title) => {
   const fragment = document.createDocumentFragment();
   Object.keys(title).forEach((key) => {
     const th = createElementWithClassName("th", "users-table__th");
-    key === "id"
-      ? (th.textContent = title[key].toUpperCase())
-      : (th.textContent = title[key]);
+    th.textContent = title[key];
     fragment.appendChild(th);
   });
   trOfThead.appendChild(fragment);
