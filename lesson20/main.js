@@ -34,11 +34,11 @@ const fetchDataInSecond = (sec, jsonUrl) => {
   });
 };
 
-const fetchPersonalData = async () => {
+const fetchUsersTableData = async () => {
   try {
     const response = await fetchDataInSecond(3000, jsonUrl);
     const json = await response.json();
-    return json.data;
+    return json.usersTableData;
   } catch (e) {
     tableWrap.textContent = "データの取得ができませんでした。";
     console.error(e);
@@ -47,10 +47,10 @@ const fetchPersonalData = async () => {
   }
 };
 
-const renderTable = (usersData) => {
+const renderTable = (usersTableData) => {
   const table = createTable();
-  table.appendChild(createTableHeader(usersData));
-  table.appendChild(createTableData(usersData));
+  table.appendChild(createTableHeader(usersTableData.title));
+  table.appendChild(createTableData(usersTableData.usersData));
   tableWrap.appendChild(table);
 };
 
@@ -60,16 +60,16 @@ const createTable = () => {
   return table;
 };
 
-const createTableHeader = (usersData) => {
+const createTableHeader = (title) => {
   const trOfThead = document.createElement("tr");
   const fragment = document.createDocumentFragment();
-  for (let key in usersData[0]) {
+  Object.keys(title).forEach((key) => {
     const th = createElementWithClassName("th", "users-table__th");
     key === "id"
-      ? (th.textContent = key.toUpperCase())
-      : (th.textContent = key);
+      ? (th.textContent = title[key].toUpperCase())
+      : (th.textContent = title[key]);
     fragment.appendChild(th);
-  }
+  });
   trOfThead.appendChild(fragment);
   return trOfThead;
 };
@@ -91,19 +91,19 @@ const createTableData = (usersData) => {
 const init = async () => {
   tableWrap.insertAdjacentElement("beforebegin", createLoader());
   loading();
-  let usersData;
+  let usersTableData;
   try {
-    usersData = await fetchPersonalData();
+    usersTableData = await fetchUsersTableData();
   } catch (e) {
     console.error(e);
   } finally {
     console.log("処理が完了しました。");
   }
-  if (usersData.length === 0) {
+  if (usersTableData.length === 0) {
     tableWrap.textContent = "データがありません。";
     return;
   } else {
-    renderTable(usersData);
+    renderTable(usersTableData);
   }
 };
 init();
