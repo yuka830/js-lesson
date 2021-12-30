@@ -47,6 +47,10 @@ const fetchUsersTableData = async () => {
   }
 };
 
+/**
+ * Rendering table using title data and users data in the same JSON file
+ * @param {Object} usersTableData array of title data and users data
+ */
 const renderTable = (usersTableData) => {
   const table = createTable();
   table.appendChild(createTableHeader(usersTableData.title));
@@ -63,6 +67,10 @@ const createTable = () => {
 const createTableHeader = (title) => {
   const trOfThead = document.createElement("tr");
   const fragment = document.createDocumentFragment();
+  /**
+   *Creating table header with title data
+   * @param {Number, String} val each value of table title
+   */
   title.forEach((val) => {
     const th = createElementWithClassName("th", "users-table__th");
     th.textContent = val;
@@ -76,6 +84,11 @@ const createTableData = (usersData) => {
   const fragment = document.createDocumentFragment();
   usersData.forEach((userData) => {
     const trOfTdata = document.createElement("tr");
+   /**
+   *Creating table data with user data
+   * @param {Array} userData an array includes objects of user data
+   * @param {String} key key of each user data
+   */ 
     Object.keys(userData).forEach((key) => {
       const td = createElementWithClassName("td", "users-table__td");
       td.textContent = userData[key];
