@@ -34,7 +34,7 @@ const fetchDataInSecond = (sec, jsonUrl) => {
   });
 };
 
-const fetchUsersTableData = async () => {
+const fetchUsersData = async () => {
   try {
     const response = await fetchDataInSecond(3000, jsonUrl);
     const json = await response.json();
@@ -49,12 +49,12 @@ const fetchUsersTableData = async () => {
 
 /**
  * Rendering table using users data from JSON file
- * @param {Object} usersTableData array of users data
+ * @param {Object} usersData array of users data
  */
-const renderTable = (usersTableData) => {
+const renderTable = (usersData) => {
   const table = createTable();
-  table.appendChild(createTableHeader(usersTableData));
-  table.appendChild(createTableData(usersTableData));
+  table.appendChild(createTableHeader(usersData));
+  table.appendChild(createTableData(usersData));
   tableWrap.appendChild(table);
 };
 
@@ -128,19 +128,19 @@ const formingTableHeaderNameWithKey = (key) => {
 const init = async () => {
   tableWrap.insertAdjacentElement("beforebegin", createLoader());
   loading();
-  let usersTableData;
+  let usersData;
   try {
-    usersTableData = await fetchUsersTableData();
+    usersData = await fetchUsersData();
   } catch (e) {
     console.error(e);
   } finally {
     console.log("処理が完了しました。");
   }
-  if (usersTableData.length === 0) {
+  if (usersData.length === 0) {
     tableWrap.textContent = "データがありません。";
     return;
   } else {
-    renderTable(usersTableData);
+    renderTable(usersData);
   }
 };
 init();
