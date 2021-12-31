@@ -38,7 +38,7 @@ const fetchUsersTableData = async () => {
   try {
     const response = await fetchDataInSecond(3000, jsonUrl);
     const json = await response.json();
-    return json.usersTableData;
+    return json.data;
   } catch (e) {
     tableWrap.textContent = "データの取得ができませんでした。";
     console.error(e);
@@ -48,13 +48,13 @@ const fetchUsersTableData = async () => {
 };
 
 /**
- * Rendering table using title data and users data in the same JSON file
- * @param {Object} usersTableData array of title data and users data
+ * Rendering table using users data from JSON file
+ * @param {Object} usersTableData array of users data
  */
 const renderTable = (usersTableData) => {
   const table = createTable();
-  table.appendChild(createTableHeader(usersTableData.title));
-  table.appendChild(createTableData(usersTableData.usersData));
+  table.appendChild(createTableHeader(usersTableData));
+  table.appendChild(createTableData(usersTableData));
   tableWrap.appendChild(table);
 };
 
