@@ -1,4 +1,4 @@
-const jsonUrl = "https://myjson.dit.upm.es/api/bins/dx91";
+const jsonUrl = "https://myjson.dit.upm.es/api/bins/cpch";
 const tableWrap = document.getElementById("js-table-wrapper");
 
 const createElementWithClassName = (element, name) => {
