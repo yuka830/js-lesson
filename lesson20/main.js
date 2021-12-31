@@ -100,18 +100,24 @@ const formingTableHeaderNameWithKey = (key) => {
   }
 };
 
-const createTableData = (usersData) => {
+/**
+ *Creating table data with value of usersData
+ * @param {Array} usersData The Array of usersData
+ */
+
+ const createTableData = (usersData) => {
   const fragment = document.createDocumentFragment();
   usersData.forEach((userData) => {
     const trOfTdata = document.createElement("tr");
-   /**
-   *Creating table data with user data
-   * @param {Array} userData an array includes objects of user data
-   * @param {String} key key of each user data
-   */ 
-    Object.keys(userData).forEach((key) => {
+    /**
+     *Extract value from each of usersData
+     * @param {Object} userData the object of each users data
+     * @param {String,Number} val value of each users data
+     */
+
+    Object.values(userData).forEach((val) => {
       const td = createElementWithClassName("td", "users-table__td");
-      td.textContent = userData[key];
+      td.textContent = val;
       trOfTdata.appendChild(td);
     });
     fragment.appendChild(trOfTdata);
