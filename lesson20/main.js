@@ -29,15 +29,24 @@ const loaded = () => {
 const fetchDataInSecond = (sec, jsonUrl) => {
   return new Promise((resolve, reject) => {
     setTimeout(() => {
-      resolve(fetch(jsonUrl));
+      resolve(fetchJson(jsonUrl));
     }, sec);
   });
 };
 
+const fetchJson = async (jsonUrl) => {
+  const response = await fetch(jsonUrl);
+  if (response.ok) {
+    const json = await response.json();
+    return json;
+  } else {
+    throw new Error(`サーバーリクエストに失敗しました: ${response.status}`);
+  }
+};
+
 const fetchUsersData = async () => {
   try {
-    const response = await fetchDataInSecond(3000, jsonUrl);
-    const json = await response.json();
+    const json = await fetchDataInSecond(3000, jsonUrl);
     return json.data;
   } catch (e) {
     tableWrap.textContent = "データの取得ができませんでした。";
