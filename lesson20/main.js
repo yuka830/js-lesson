@@ -64,20 +64,40 @@ const createTable = () => {
   return table;
 };
 
-const createTableHeader = (title) => {
+/**
+ *Creating table header with key of usersData
+ * @param {Array} usersData The Array of usersData
+ */
+ const createTableHeader = (usersData) => {
   const trOfThead = document.createElement("tr");
   const fragment = document.createDocumentFragment();
   /**
-   *Creating table header with title data
-   * @param {Number, String} val each value of table title
+   *Extract key from usersData
+   * @param {Object} usersData[0] value from one of userData in the object
+   * @param {String} key key of userData
    */
-  title.forEach((val) => {
+  Object.keys(usersData[0]).forEach((key) => {
     const th = createElementWithClassName("th", "users-table__th");
-    th.textContent = val;
+    th.textContent = formingTableHeaderNameWithKey(key);
     fragment.appendChild(th);
   });
   trOfThead.appendChild(fragment);
   return trOfThead;
+};
+
+const formingTableHeaderNameWithKey = (key) => {
+  switch (key) {
+    case "id":
+      return "ID";
+    case "name":
+      return "名前";
+    case "sex":
+      return "性別";
+    case "age":
+      return "年齢";
+    default:
+      console.error();
+  }
 };
 
 const createTableData = (usersData) => {
