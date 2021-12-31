@@ -68,21 +68,25 @@ const createTable = () => {
  *Creating table header with key of usersData
  * @param {Array} usersData The Array of usersData
  */
- const createTableHeader = (usersData) => {
+const createTableHeader = (usersData) => {
   const trOfThead = document.createElement("tr");
   const fragment = document.createDocumentFragment();
-  /**
-   *Extract key from usersData
-   * @param {Object} usersData[0] value from one of userData in the object
-   * @param {String} key key of userData
-   */
+  AddTextContentToThead(usersData, fragment);
+  trOfThead.appendChild(fragment);
+  return trOfThead;
+};
+
+/**
+ *Extract key from usersData
+ * @param {Object} usersData[0] value from one of userData in the object
+ * @param {String} key key of userData
+ */
+const AddTextContentToThead = (usersData, fragment) => {
   Object.keys(usersData[0]).forEach((key) => {
     const th = createElementWithClassName("th", "users-table__th");
     th.textContent = formingTableHeaderNameWithKey(key);
     fragment.appendChild(th);
   });
-  trOfThead.appendChild(fragment);
-  return trOfThead;
 };
 
 const formingTableHeaderNameWithKey = (key) => {
@@ -105,7 +109,7 @@ const formingTableHeaderNameWithKey = (key) => {
  * @param {Array} usersData The Array of usersData
  */
 
- const createTableData = (usersData) => {
+const createTableData = (usersData) => {
   const fragment = document.createDocumentFragment();
   usersData.forEach((userData) => {
     const trOfTdata = document.createElement("tr");
