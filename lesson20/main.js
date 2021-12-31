@@ -96,7 +96,7 @@ const formingTableHeaderNameWithKey = (key) => {
     case "age":
       return "年齢";
     default:
-      console.error();
+      console.error(`${key}は見つかりませんでした`);
   }
 };
 
