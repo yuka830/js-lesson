@@ -152,8 +152,7 @@ const init = async () => {
   if (usersData.length === 0) {
     tableWrap.textContent = "データがありません。";
     return;
-  } else {
-    renderTable(usersData);
   }
+  renderTable(usersData);
 };
 init();
