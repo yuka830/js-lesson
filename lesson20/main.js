@@ -51,8 +51,6 @@ const fetchUsersData = async () => {
   } catch (e) {
     tableWrap.textContent = "データの取得ができませんでした。";
     console.error(e);
-  } finally {
-    loaded();
   }
 };
 
@@ -146,7 +144,9 @@ const init = async () => {
     usersData = await fetchUsersData();
   } catch (e) {
     console.error(e);
+    tableWrap.textContent = `エラーが発生しました: ${e.message}`;
   } finally {
+    loaded();
     console.log("処理が完了しました。");
   }
   if (usersData.length === 0) {
