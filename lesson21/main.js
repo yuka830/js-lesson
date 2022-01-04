@@ -231,6 +231,6 @@ const init = async () => {
   }
   renderTable(usersData);
   renderSortBtn(usersData);
-  clickSortBtn(usersData);
+  clickSortBtn();
 };
 init();
