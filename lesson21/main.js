@@ -1,4 +1,4 @@
-const jsonUrl = "https://myjson.dit.upm.es/api/bins/cpch";
+const jsonUrl = "https://myjson.dit.upm.es/api/bins/4gct";
 const tableWrap = document.getElementById("js-table-wrapper");
 let sortState = "both";
 
