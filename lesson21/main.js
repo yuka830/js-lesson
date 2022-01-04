@@ -158,7 +158,7 @@ const renderSortBtn = () => {
 };
 
 const clickSortBtn = () => {
-  const sortArrow = document.querySelector(".sort-img");
+  const sortArrow = document.querySelector(".sort-btn");
   sortArrow.addEventListener("click", () => {
     changeSortStateAndArrowImg(sortArrow);
     rerenderTableData(newUsersData);
