@@ -180,16 +180,18 @@ const changeSortStateAndArrowImg = (sortArrow) => {
   }
 };
 
-const rerenderTableData = (table, users) => {
+const rerenderTableData = (newUsersData) => {
+  const table = document.getElementById("js-table");
+  const th = document.getElementById("id");
+  const colNum = th.cellIndex;
   if (sortState === "both") {
-    sortInit(users);
+    sortInit(newUsersData);
   } else if (sortState === "asc") {
-    sortAsc(users);
+    sortAsc(newUsersData, colNum);
   } else {
-    sortDesc(users);
+    sortDesc(newUsersData, colNum);
   }
-  removeTrOfTdata(table);
-  table.appendChild(createTableData(users));
+  table.append(...newUsersData);
 };
 
 const sortAsc = (usersData, colNum) => {
@@ -207,13 +209,6 @@ const sortDesc = (usersData, colNum) => {
 const sortInit = (usersData) => {
   usersData.sort(() => {
     return 0.5 - Math.random();
-  });
-};
-
-const removeTrOfTdata = (table) => {
-  const trOfTdata = document.querySelectorAll(".users-table__tr-td");
-  trOfTdata.forEach((tr) => {
-    table.removeChild(tr);
   });
 };
 
