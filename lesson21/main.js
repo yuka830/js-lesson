@@ -119,19 +119,22 @@ const formingTableHeaderNameWithKey = (key) => {
  * @param {Array} usersData The Array of usersData
  */
 
-const createTableData = (usersData) => {
+ const createTableData = (usersData) => {
   const fragment = document.createDocumentFragment();
-  usersData.forEach((userData) => {
+  usersData.forEach((userData, index) => {
     const trOfTdata = createElementWithClassName("tr", "users-table__tr-td");
+    const usersIndex = ++index;
     /**
      *Extract value from each of usersData
      * @param {Object} userData the object of each users data
      * @param {String,Number} val value of each users data
      */
 
-    Object.values(userData).forEach((val) => {
+    Object.keys(userData).forEach((key) => {
       const td = createElementWithClassName("td", "users-table__td");
-      td.textContent = val;
+      key === "id"
+        ? (td.textContent = usersIndex)
+        : (td.textContent = userData[key]);
       trOfTdata.appendChild(td);
     });
     fragment.appendChild(trOfTdata);
