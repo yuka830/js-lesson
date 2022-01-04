@@ -1,6 +1,7 @@
 const jsonUrl = "https://myjson.dit.upm.es/api/bins/4gct";
 const tableWrap = document.getElementById("js-table-wrapper");
 let sortState = "both";
+let newUsersData = [];
 
 const createElementWithClassName = (element, name) => {
   const createdElement = document.createElement(element);
@@ -62,7 +63,6 @@ const fetchUsersData = async () => {
 const renderTable = (usersData) => {
   const table = createTable();
   table.appendChild(createTableHeader(usersData));
-  sortInit(usersData);
   table.appendChild(createTableData(usersData));
   tableWrap.appendChild(table);
 };
@@ -119,7 +119,7 @@ const formingTableHeaderNameWithKey = (key) => {
  * @param {Array} usersData The Array of usersData
  */
 
- const createTableData = (usersData) => {
+const createTableData = (usersData) => {
   const fragment = document.createDocumentFragment();
   usersData.forEach((userData, index) => {
     const trOfTdata = createElementWithClassName("tr", "users-table__tr-td");
@@ -159,12 +159,15 @@ const renderSortBtn = () => {
 
 const clickSortBtn = () => {
   const sortArrow = document.querySelector(".sort-img");
-  const trOfTdata = document.querySelectorAll(".users-table__tr-td");
-  const newUsersData = Array.from(trOfTdata);
   sortArrow.addEventListener("click", () => {
     changeSortStateAndArrowImg(sortArrow);
     rerenderTableData(newUsersData);
   });
+};
+
+const getNewUsersData = () => {
+  const trOfTdata = document.querySelectorAll(".users-table__tr-td");
+  return (newUsersData = Array.from(trOfTdata));
 };
 
 const changeSortStateAndArrowImg = (sortArrow) => {
@@ -232,5 +235,7 @@ const init = async () => {
   renderTable(usersData);
   renderSortBtn(usersData);
   clickSortBtn();
+  getNewUsersData();
+  rerenderTableData(newUsersData);
 };
 init();
