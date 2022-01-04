@@ -192,20 +192,20 @@ const rerenderTableData = (table, users) => {
   table.appendChild(createTableData(users));
 };
 
-const sortAsc = (users) => {
-  users.sort((a, b) => {
-    return a.id - b.id;
+const sortAsc = (usersData, colNum) => {
+  usersData.sort((a, b) => {
+    return a.cells[colNum].innerHTML - b.cells[colNum].innerHTML;
   });
 };
 
-const sortDesc = (users) => {
-  users.sort((a, b) => {
-    return b.id - a.id;
+const sortDesc = (usersData, colNum) => {
+  usersData.sort((a, b) => {
+    return b.cells[colNum].innerHTML - a.cells[colNum].innerHTML;
   });
 };
 
-const sortInit = (users) => {
-  users.sort(() => {
+const sortInit = (usersData) => {
+  usersData.sort(() => {
     return 0.5 - Math.random();
   });
 };
