@@ -157,13 +157,13 @@ const renderSortBtn = () => {
   targetEle.appendChild(btn);
 };
 
-const clickSortBtn = (usersData) => {
-  const table = document.getElementById("js-table");
+const clickSortBtn = () => {
   const sortArrow = document.querySelector(".sort-img");
-  const users = [...usersData];
+  const trOfTdata = document.querySelectorAll(".users-table__tr-td");
+  const newUsersData = Array.from(trOfTdata);
   sortArrow.addEventListener("click", () => {
     changeSortStateAndArrowImg(sortArrow);
-    rerenderTableData(table, users);
+    rerenderTableData(newUsersData);
   });
 };
 
