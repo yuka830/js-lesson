@@ -92,6 +92,7 @@ const createTableHeader = (usersData) => {
  */
 const AddTextContentToThead = (usersData, fragment) => {
   Object.keys(usersData[0]).forEach((key) => {
+    if (key === "memberId") return;
     const th = createElementWithClassName("th", "users-table__th");
     th.textContent = formingTableHeaderNameWithKey(key);
     th.id = key;
