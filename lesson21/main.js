@@ -115,12 +115,13 @@ const formingTableHeaderNameWithKey = (key) => {
       console.error(`${key}は見つかりませんでした`);
   }
 };
+
 /**
  *Creating table data with value of usersData
  * @param {Array} usersData The Array of usersData
  */
 
- const createTableData = (usersData) => {
+const createTableData = (usersData) => {
   const fragment = document.createDocumentFragment();
   usersData.forEach((userData) => {
     const trOfTdata = createElementWithClassName("tr", "users-table__tr-td");
@@ -156,18 +157,13 @@ const renderSortBtn = () => {
   targetEle.appendChild(btn);
 };
 
-const clickSortBtn = () => {
+const clickSortBtn = (usersData) => {
   const sortArrow = document.querySelector(".sort-btn");
   const sortArrowImg = document.querySelector(".sort-img");
   sortArrow.addEventListener("click", () => {
     changeSortStateAndArrowImg(sortArrowImg);
-    rerenderTableData(newUsersData);
+    rerenderTableData(usersData);
   });
-};
-
-const getNewUsersData = () => {
-  const trOfTdata = document.querySelectorAll(".users-table__tr-td");
-  return (newUsersData = Array.from(trOfTdata));
 };
 
 const changeSortStateAndArrowImg = (sortArrow) => {
@@ -183,35 +179,34 @@ const changeSortStateAndArrowImg = (sortArrow) => {
   }
 };
 
-const rerenderTableData = (newUsersData) => {
+const rerenderTableData = (usersData) => {
   const table = document.getElementById("js-table");
-  const th = document.getElementById("id");
-  const colNum = th.cellIndex;
-  if (sortState === "both") {
-    sortInit(newUsersData);
-  } else if (sortState === "asc") {
-    sortAsc(newUsersData, colNum);
-  } else {
-    sortDesc(newUsersData, colNum);
+  const copiedUsersData = [...usersData];
+  if (sortState === "asc") {
+    sortAsc(copiedUsersData);
+  } else if (sortState === "desc") {
+    sortDesc(copiedUsersData);
   }
-  table.append(...newUsersData);
+  removeTrOfTdata(table);
+  table.appendChild(createTableData(copiedUsersData));
 };
 
-const sortAsc = (usersData, colNum) => {
-  usersData.sort((a, b) => {
-    return a.cells[colNum].innerHTML - b.cells[colNum].innerHTML;
+const sortAsc = (copiedUsersData) => {
+  copiedUsersData.sort((a, b) => {
+    return a.memberId - b.memberId;
   });
 };
 
-const sortDesc = (usersData, colNum) => {
-  usersData.sort((a, b) => {
-    return b.cells[colNum].innerHTML - a.cells[colNum].innerHTML;
+const sortDesc = (copiedUsersData) => {
+  copiedUsersData.sort((a, b) => {
+    return b.memberId - a.memberId;
   });
 };
 
-const sortInit = (usersData) => {
-  usersData.sort(() => {
-    return 0.5 - Math.random();
+const removeTrOfTdata = (table) => {
+  const trOfTdata = document.querySelectorAll(".users-table__tr-td");
+  trOfTdata.forEach((tr) => {
+    table.removeChild(tr);
   });
 };
 
@@ -234,7 +229,6 @@ const init = async () => {
   }
   renderTable(usersData);
   renderSortBtn(usersData);
-  clickSortBtn();
-  rerenderTableData(newUsersData);
+  clickSortBtn(usersData);
 };
 init();
