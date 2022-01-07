@@ -1,4 +1,4 @@
-const jsonUrl = "https://myjson.dit.upm.es/api/bins/4gct";
+const jsonUrl = "https://myjson.dit.upm.es/api/bins/710x";
 const tableWrap = document.getElementById("js-table-wrapper");
 let sortState = "both";
 let newUsersData = [];
@@ -103,6 +103,8 @@ const formingTableHeaderNameWithKey = (key) => {
   switch (key) {
     case "id":
       return "ID";
+    case "memberId":
+      return "memberId";
     case "name":
       return "名前";
     case "sex":
@@ -113,7 +115,6 @@ const formingTableHeaderNameWithKey = (key) => {
       console.error(`${key}は見つかりませんでした`);
   }
 };
-
 /**
  *Creating table data with value of usersData
  * @param {Array} usersData The Array of usersData
