@@ -1,7 +1,6 @@
 const jsonUrl = "https://myjson.dit.upm.es/api/bins/710x";
 const tableWrap = document.getElementById("js-table-wrapper");
 let sortState = "both";
-let newUsersData = [];
 
 const createElementWithClassName = (element, name) => {
   const createdElement = document.createElement(element);
@@ -236,7 +235,6 @@ const init = async () => {
   renderTable(usersData);
   renderSortBtn(usersData);
   clickSortBtn();
-  getNewUsersData();
   rerenderTableData(newUsersData);
 };
 init();
