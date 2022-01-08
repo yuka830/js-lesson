@@ -1,0 +1,41 @@
+.loading {
+  position: fixed;
+  z-index: 1;
+}
+
+.loaded {
+  opacity: 0;
+  visibility: hidden;
+}
+
+.users-table {
+  text-align: center;
+  margin: 15px;
+}
+
+.users-table__th,
+.users-table__td {
+  border: solid 1px black;
+}
+
+.users-table__th {
+  padding: 20px 15px;
+  background-color: #ead3d1;
+  font-weight: 700;
+}
+
+.users-table__td {
+  padding: 15px;
+}
+
+.sort-btn {
+  background: none;
+  border: 0;
+  cursor: pointer;
+}
+
+.sort-img {
+  vertical-align: text-top;
+  margin-left: 5px;
+  height: 15px;
+}
