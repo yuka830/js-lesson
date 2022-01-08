@@ -164,13 +164,15 @@ const changeSortStateAndArrowImg = (sortArrow) => {
   if (sortState === "both") {
     sortState = "asc";
     sortArrow.src = "/img/asc.svg";
-  } else if (sortState === "asc") {
+    return;
+  }
+  if (sortState === "asc") {
     sortState = "desc";
     sortArrow.src = "/img/desc.svg";
-  } else {
-    sortState = "both";
-    sortArrow.src = "/img/both.svg";
+    return;
   }
+  sortState = "both";
+  sortArrow.src = "/img/both.svg";
 };
 
 const rerenderTableData = (usersData) => {
