@@ -19,11 +19,23 @@
 }
 
 .users-table__th {
-  padding: 10px;
+  padding: 20px 15px;
   background-color: #ead3d1;
   font-weight: 700;
 }
 
 .users-table__td {
-  padding: 10px;
+  padding: 15px;
+}
+
+.sort-btn {
+  background: none;
+  border: 0;
+  cursor: pointer;
+}
+
+.sort-img {
+  vertical-align: text-top;
+  margin-left: 5px;
+  height: 15px;
 }

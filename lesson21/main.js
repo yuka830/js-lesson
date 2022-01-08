@@ -1,5 +1,6 @@
-const jsonUrl = "https://myjson.dit.upm.es/api/bins/cpch";
+const jsonUrl = "https://myjson.dit.upm.es/api/bins/710x";
 const tableWrap = document.getElementById("js-table-wrapper");
+let sortState = "both";
 
 const createElementWithClassName = (element, name) => {
   const createdElement = document.createElement(element);
@@ -76,7 +77,7 @@ const createTable = () => {
  * @param {Array} usersData The Array of usersData
  */
 const createTableHeader = (usersData) => {
-  const trOfThead = document.createElement("tr");
+  const trOfThead = createElementWithClassName("tr", "users-table__tr-th");
   const fragment = document.createDocumentFragment();
   AddTextContentToThead(usersData, fragment);
   trOfThead.appendChild(fragment);
@@ -90,8 +91,10 @@ const createTableHeader = (usersData) => {
  */
 const AddTextContentToThead = (usersData, fragment) => {
   Object.keys(usersData[0]).forEach((key) => {
+    if (key === "memberId") return;
     const th = createElementWithClassName("th", "users-table__th");
     th.textContent = formingTableHeaderNameWithKey(key);
+    th.id = key;
     fragment.appendChild(th);
   });
 };
@@ -100,6 +103,8 @@ const formingTableHeaderNameWithKey = (key) => {
   switch (key) {
     case "id":
       return "ID";
+    case "memberId":
+      return "memberId";
     case "name":
       return "名前";
     case "sex":
@@ -119,21 +124,86 @@ const formingTableHeaderNameWithKey = (key) => {
 const createTableData = (usersData) => {
   const fragment = document.createDocumentFragment();
   usersData.forEach((userData) => {
-    const trOfTdata = document.createElement("tr");
-    /**
-     *Extract value from each of usersData
-     * @param {Object} userData the object of each users data
-     * @param {String,Number} val value of each users data
-     */
-
-    Object.values(userData).forEach((val) => {
+    const trOfTdata = createElementWithClassName("tr", "users-table__tr-td");
+    Object.keys(userData).forEach((key) => {
+      if (key === "id") return;
       const td = createElementWithClassName("td", "users-table__td");
-      td.textContent = val;
+      td.textContent = userData[key];
       trOfTdata.appendChild(td);
     });
     fragment.appendChild(trOfTdata);
   });
   return fragment;
+};
+
+const createSortBtn = () => {
+  const btn = createElementWithClassName("button", "sort-btn");
+  const sortArrow = createElementWithClassName("img", "sort-img");
+  // bothのイメージをデフォルトとする
+  sortArrow.src = "./img/both.svg";
+  btn.appendChild(sortArrow);
+  return btn;
+};
+
+const renderSortBtn = () => {
+  const btn = createSortBtn();
+  const targetEle = document.getElementById("id");
+  targetEle.appendChild(btn);
+};
+
+const clickSortBtn = (usersData) => {
+  const sortArrow = document.querySelector(".sort-btn");
+  const sortArrowImg = document.querySelector(".sort-img");
+  sortArrow.addEventListener("click", () => {
+    changeSortStateAndArrowImg(sortArrowImg);
+    rerenderTableData(usersData);
+  });
+};
+
+const changeSortStateAndArrowImg = (sortArrow) => {
+  if (sortState === "both") {
+    sortState = "asc";
+    sortArrow.src = "/img/asc.svg";
+    return;
+  }
+  if (sortState === "asc") {
+    sortState = "desc";
+    sortArrow.src = "/img/desc.svg";
+    return;
+  }
+  sortState = "both";
+  sortArrow.src = "/img/both.svg";
+};
+
+const rerenderTableData = (usersData) => {
+  const table = document.getElementById("js-table");
+  let copiedUsersData = [...usersData];
+  if (sortState === "asc") copiedUsersData = sortAsc(usersData);
+  if (sortState === "desc") copiedUsersData = sortDesc(usersData);
+  removeTrOfTdata(table);
+  table.appendChild(createTableData(copiedUsersData));
+};
+
+const sortAsc = (usersData) => {
+  let copiedUsersData = [...usersData];
+  copiedUsersData.sort((a, b) => {
+    return a.memberId - b.memberId;
+  });
+  return copiedUsersData;
+};
+const sortDesc = (usersData) => {
+  let copiedUsersData = [...usersData];
+  copiedUsersData.sort((a, b) => {
+    return b.memberId - a.memberId;
+  });
+  return copiedUsersData;
+};
+
+const removeTrOfTdata = (table) => {
+  const trOfTdata = document.querySelectorAll(".users-table__tr-td");
+  trOfTdata.forEach((tr) => {
+    table.removeChild(tr);
+  });
 };
 
 const init = async () => {
@@ -154,5 +224,7 @@ const init = async () => {
     return;
   }
   renderTable(usersData);
+  renderSortBtn(usersData);
+  clickSortBtn(usersData);
 };
 init();
