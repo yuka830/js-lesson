@@ -125,12 +125,6 @@ const createTableData = (usersData) => {
   const fragment = document.createDocumentFragment();
   usersData.forEach((userData) => {
     const trOfTdata = createElementWithClassName("tr", "users-table__tr-td");
-    /**
-     *Extract value from each of usersData
-     * @param {Object} userData the object of each users data
-     * @param {String,Number} val value of each users data
-     */
-
     Object.keys(userData).forEach((key) => {
       if (key === "id") return;
       const td = createElementWithClassName("td", "users-table__td");
