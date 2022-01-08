@@ -177,26 +177,26 @@ const changeSortStateAndArrowImg = (sortArrow) => {
 
 const rerenderTableData = (usersData) => {
   const table = document.getElementById("js-table");
-  const copiedUsersData = [...usersData];
-  if (sortState === "asc") {
-    sortAsc(copiedUsersData);
-  } else if (sortState === "desc") {
-    sortDesc(copiedUsersData);
-  }
+  let copiedUsersData = [...usersData];
+  if (sortState === "asc") copiedUsersData = sortAsc(usersData);
+  if (sortState === "desc") copiedUsersData = sortDesc(usersData);
   removeTrOfTdata(table);
   table.appendChild(createTableData(copiedUsersData));
 };
 
-const sortAsc = (copiedUsersData) => {
+const sortAsc = (usersData) => {
+  let copiedUsersData = [...usersData];
   copiedUsersData.sort((a, b) => {
     return a.memberId - b.memberId;
   });
+  return copiedUsersData;
 };
-
-const sortDesc = (copiedUsersData) => {
+const sortDesc = (usersData) => {
+  let copiedUsersData = [...usersData];
   copiedUsersData.sort((a, b) => {
     return b.memberId - a.memberId;
   });
+  return copiedUsersData;
 };
 
 const removeTrOfTdata = (table) => {
