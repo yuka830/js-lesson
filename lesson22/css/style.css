@@ -16,6 +16,7 @@
 .users-table__th,
 .users-table__td {
   border: solid 1px black;
+  min-width: 60px;
 }
 
 .users-table__th {

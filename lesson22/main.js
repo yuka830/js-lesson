@@ -1,6 +1,7 @@
 const jsonUrl = "https://myjson.dit.upm.es/api/bins/710x";
 const tableWrap = document.getElementById("js-table-wrapper");
 let sortState = "both";
+let targetSortElements = ["id", "age"];
 
 const createElementWithClassName = (element, name) => {
   const createdElement = document.createElement(element);
@@ -145,56 +146,74 @@ const createSortBtn = () => {
   return btn;
 };
 
-const renderSortBtn = () => {
-  const btn = createSortBtn();
-  const targetEle = document.getElementById("id");
-  targetEle.appendChild(btn);
-};
-
-const clickSortBtn = (usersData) => {
-  const sortArrow = document.querySelector(".sort-btn");
-  const sortArrowImg = document.querySelector(".sort-img");
-  sortArrow.addEventListener("click", () => {
-    changeSortStateAndArrowImg(sortArrowImg);
-    rerenderTableData(usersData);
+const setDataSort = (usersData) => {
+  Object.keys(usersData[0]).forEach((key) => {
+    if (targetSortElements.includes(key)) {
+      const element = document.getElementById(key);
+      element.dataset.sort = "sort";
+    }
   });
 };
 
-const changeSortStateAndArrowImg = (sortArrow) => {
+const renderSortBtn = (usersData) => {
+  setDataSort(usersData);
+  const elements = document.querySelectorAll("[data-sort]");
+  Array.from(elements).forEach((element) => {
+    const btn = createSortBtn();
+    element.appendChild(btn);
+  });
+};
+
+const clickSortBtn = (usersData) => {
+  const sortArrows = document.querySelectorAll(".sort-btn");
+  Array.from(sortArrows).forEach((sortArrow) => {
+    const idName = sortArrow.parentNode.id;
+    const sortArrowImg = sortArrow.firstChild;
+    sortArrow.addEventListener("click", () => {
+      changeSortStateAndArrowImg(sortArrowImg);
+      rerenderTableData(usersData, idName);
+    });
+  });
+};
+
+const changeSortStateAndArrowImg = (sortArrowImg) => {
   if (sortState === "both") {
     sortState = "asc";
-    sortArrow.src = "/img/asc.svg";
+    sortArrowImg.src = "/img/asc.svg";
     return;
   }
   if (sortState === "asc") {
     sortState = "desc";
-    sortArrow.src = "/img/desc.svg";
+    sortArrowImg.src = "/img/desc.svg";
     return;
   }
   sortState = "both";
-  sortArrow.src = "/img/both.svg";
+  sortArrowImg.src = "/img/both.svg";
 };
 
-const rerenderTableData = (usersData) => {
+const rerenderTableData = (usersData, idName) => {
   const table = document.getElementById("js-table");
   let copiedUsersData = [...usersData];
-  if (sortState === "asc") copiedUsersData = sortAsc(usersData);
-  if (sortState === "desc") copiedUsersData = sortDesc(usersData);
+  if (sortState === "asc") copiedUsersData = sortAsc(usersData, idName);
+  if (sortState === "desc") copiedUsersData = sortDesc(usersData, idName);
   removeTrOfTdata(table);
   table.appendChild(createTableData(copiedUsersData));
 };
 
-const sortAsc = (usersData) => {
+const sortAsc = (usersData, idName) => {
+  if (idName === "id") idName = "memberId";
   let copiedUsersData = [...usersData];
   copiedUsersData.sort((a, b) => {
-    return a.memberId - b.memberId;
+    return a[idName] - b[idName];
   });
   return copiedUsersData;
 };
-const sortDesc = (usersData) => {
+
+const sortDesc = (usersData, idName) => {
+  if (idName === "id") idName = "memberId";
   let copiedUsersData = [...usersData];
   copiedUsersData.sort((a, b) => {
-    return b.memberId - a.memberId;
+    return b[idName] - a[idName];
   });
   return copiedUsersData;
 };
