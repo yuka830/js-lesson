@@ -121,7 +121,6 @@ const formingTableHeaderNameWithKey = (key) => {
  *Creating table data with value of usersData
  * @param {Array} usersData The Array of usersData
  */
-
 const createTableData = (usersData) => {
   const fragment = document.createDocumentFragment();
   usersData.forEach((userData) => {
@@ -172,8 +171,18 @@ const clickSortBtn = (usersData) => {
     sortArrow.addEventListener("click", () => {
       changeSortStateAndArrowImg(sortArrowImg);
       rerenderTableData(usersData, idName);
+      initOthersSortImg(idName);
     });
   });
+};
+
+const initOthersSortImg = (idName) => {
+  const othersId = targetSortElements.find((x) => x !== idName);
+  const othersBtn = document.getElementById(othersId).firstElementChild;
+  const othersImg = othersBtn.firstElementChild;
+  if (othersImg.src !== "/img/both.svg") {
+    othersImg.src = "/img/both.svg";
+  }
 };
 
 const changeSortStateAndArrowImg = (sortArrowImg) => {
