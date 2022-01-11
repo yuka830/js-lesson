@@ -166,18 +166,18 @@ const renderSortBtn = (usersData) => {
 const clickSortBtn = (usersData) => {
   const sortArrows = document.querySelectorAll(".sort-btn");
   Array.from(sortArrows).forEach((sortArrow) => {
-    const idName = sortArrow.parentNode.id;
+    const tHeaderId = sortArrow.parentNode.id;
     const sortArrowImg = sortArrow.firstChild;
     sortArrow.addEventListener("click", () => {
       changeSortStateAndArrowImg(sortArrowImg);
-      rerenderTableData(usersData, idName);
-      initOthersSortImg(idName);
+      rerenderTableData(usersData, tHeaderId);
+      initOthersSortImg(tHeaderId);
     });
   });
 };
 
-const initOthersSortImg = (idName) => {
-  const othersId = targetSortElements.find((x) => x !== idName);
+const initOthersSortImg = (tHeaderId) => {
+  const othersId = targetSortElements.find((x) => x !== tHeaderId);
   const othersBtn = document.getElementById(othersId).firstElementChild;
   const othersImg = othersBtn.firstElementChild;
   if (othersImg.src !== "/img/both.svg") {
@@ -200,11 +200,11 @@ const changeSortStateAndArrowImg = (sortArrowImg) => {
   sortArrowImg.src = "/img/both.svg";
 };
 
-const rerenderTableData = (usersData, idName) => {
+const rerenderTableData = (usersData, tHeaderId) => {
   const table = document.getElementById("js-table");
   let copiedUsersData = [...usersData];
-  if (sortState === "asc") copiedUsersData = sortAsc(usersData, idName);
-  if (sortState === "desc") copiedUsersData = sortDesc(usersData, idName);
+  if (sortState === "asc") copiedUsersData = sortAsc(usersData, tHeaderId);
+  if (sortState === "desc") copiedUsersData = sortDesc(usersData, tHeaderId);
   removeTrOfTdata(table);
   table.appendChild(createTableData(copiedUsersData));
 };
