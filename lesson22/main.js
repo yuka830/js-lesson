@@ -164,11 +164,11 @@ const renderSortBtn = (usersData) => {
 };
 
 const clickSortBtn = (usersData) => {
-  const sortArrows = document.querySelectorAll(".sort-btn");
-  Array.from(sortArrows).forEach((sortArrow) => {
-    const tHeaderId = sortArrow.parentNode.id;
-    const sortArrowImg = sortArrow.firstChild;
-    sortArrow.addEventListener("click", () => {
+  const sortArrowBtns = document.querySelectorAll(".sort-btn");
+  Array.from(sortArrowBtns).forEach((sortArrowBtn) => {
+    const tHeaderId = sortArrowBtn.parentNode.id;
+    const sortArrowImg = sortArrowBtn.firstChild;
+    sortArrowBtn.addEventListener("click", () => {
       changeSortStateAndArrowImg(sortArrowImg);
       rerenderTableData(usersData, tHeaderId);
       initOthersSortImg(tHeaderId);
