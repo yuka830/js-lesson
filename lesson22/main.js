@@ -167,7 +167,7 @@ const clickSortBtn = (usersData) => {
   const sortArrowBtns = document.querySelectorAll(".sort-btn");
   Array.from(sortArrowBtns).forEach((sortArrowBtn) => {
     const tHeaderId = sortArrowBtn.parentNode.id;
-    const sortArrowImg = sortArrowBtn.firstChild;
+    const sortArrowImg = sortArrowBtn.firstElementChild;
     sortArrowBtn.addEventListener("click", () => {
       changeSortStateAndArrowImg(sortArrowImg);
       rerenderTableData(usersData, tHeaderId);
@@ -177,7 +177,7 @@ const clickSortBtn = (usersData) => {
 };
 
 const initOthersSortImg = (tHeaderId) => {
-  const othersId = targetSortElements.find((x) => x !== tHeaderId);
+  const othersId = targetSortElements.find((name) => name !== tHeaderId);
   const othersBtn = document.getElementById(othersId).firstElementChild;
   const othersImg = othersBtn.firstElementChild;
   if (othersImg.src !== "/img/both.svg") {
