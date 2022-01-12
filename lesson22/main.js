@@ -169,19 +169,20 @@ const clickSortBtn = (usersData) => {
     const tHeaderId = sortArrowBtn.parentNode.id;
     const sortArrowImg = sortArrowBtn.firstElementChild;
     sortArrowBtn.addEventListener("click", () => {
+      initSortAndOthersSortImg(tHeaderId);
       changeSortStateAndArrowImg(sortArrowImg);
       rerenderTableData(usersData, tHeaderId);
-      initOthersSortImg(tHeaderId);
     });
   });
 };
 
-const initOthersSortImg = (tHeaderId) => {
+const initSortAndOthersSortImg = (tHeaderId) => {
   const othersId = targetSortElements.find((name) => name !== tHeaderId);
   const othersBtn = document.getElementById(othersId).firstElementChild;
   const othersImg = othersBtn.firstElementChild;
-  if (othersImg.src !== "/img/both.svg") {
+  if (othersImg.getAttribute("src") !== "/img/both.svg") {
     othersImg.src = "/img/both.svg";
+    sortState = "both";
   }
 };
 
