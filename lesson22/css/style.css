@@ -33,10 +33,13 @@
   background: none;
   border: 0;
   cursor: pointer;
+  padding: 0;
+  width: 20px;
+  margin-left: 5px;
 }
 
 .sort-img {
   vertical-align: text-top;
-  margin-left: 5px;
   height: 15px;
+  width: 100%;
 }
