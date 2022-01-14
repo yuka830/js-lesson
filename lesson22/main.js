@@ -157,7 +157,7 @@ const setDataSort = (usersData) => {
 const renderSortBtn = (usersData) => {
   setDataSort(usersData);
   const elements = document.querySelectorAll("[data-sort]");
-  Array.from(elements).forEach((element) => {
+  elements.forEach((element) => {
     const btn = createSortBtn();
     element.appendChild(btn);
   });
@@ -165,7 +165,7 @@ const renderSortBtn = (usersData) => {
 
 const clickSortBtn = (usersData) => {
   const sortArrowBtns = document.querySelectorAll(".sort-btn");
-  Array.from(sortArrowBtns).forEach((sortArrowBtn) => {
+  sortArrowBtns.forEach((sortArrowBtn) => {
     const tHeaderId = sortArrowBtn.parentNode.id;
     const sortArrowImg = sortArrowBtn.firstElementChild;
     sortArrowBtn.addEventListener("click", () => {
