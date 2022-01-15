@@ -16,6 +16,7 @@
 .users-table__th,
 .users-table__td {
   border: solid 1px black;
+  min-width: 60px;
 }
 
 .users-table__th {
@@ -28,14 +29,17 @@
   padding: 15px;
 }
 
-.sort-btn {
+.js-sort-btn {
   background: none;
   border: 0;
   cursor: pointer;
+  padding: 0;
+  width: 20px;
+  margin-left: 5px;
 }
 
 .sort-img {
   vertical-align: text-top;
-  margin-left: 5px;
   height: 15px;
+  width: 100%;
 }
