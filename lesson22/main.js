@@ -187,18 +187,19 @@ const initSortAndOthersSortImg = (tHeaderId) => {
 };
 
 const changeSortStateAndArrowImg = (sortArrowImg) => {
-  if (sortState === "both") {
-    sortState = "asc";
-    sortArrowImg.src = "/img/asc.svg";
-    return;
+  switch (sortState) {
+    case "both":
+      sortState = "asc";
+      sortArrowImg.src = "/img/asc.svg";
+      break;
+    case "asc":
+      sortState = "desc";
+      sortArrowImg.src = "/img/desc.svg";
+      break;
+    default:
+      sortState = "both";
+      sortArrowImg.src = "/img/both.svg";
   }
-  if (sortState === "asc") {
-    sortState = "desc";
-    sortArrowImg.src = "/img/desc.svg";
-    return;
-  }
-  sortState = "both";
-  sortArrowImg.src = "/img/both.svg";
 };
 
 const rerenderTableData = (usersData, tHeaderId) => {
