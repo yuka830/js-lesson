@@ -166,9 +166,9 @@ const renderSortBtn = (usersData) => {
 const clickSortBtn = (usersData) => {
   const sortArrowBtns = document.querySelectorAll(".js-sort-btn");
   sortArrowBtns.forEach((sortArrowBtn) => {
-    const tHeaderId = sortArrowBtn.parentNode.id;
-    const sortArrowImg = sortArrowBtn.firstElementChild;
-    sortArrowBtn.addEventListener("click", () => {
+    sortArrowBtn.addEventListener("click", (e) => {
+      const tHeaderId = e.currentTarget.parentNode.id;
+      const sortArrowImg = e.currentTarget.firstElementChild;
       initSortAndOthersSortImg(tHeaderId);
       changeSortStateAndArrowImg(sortArrowImg);
       rerenderTableData(usersData, tHeaderId);
