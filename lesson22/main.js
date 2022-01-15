@@ -137,7 +137,7 @@ const createTableData = (usersData) => {
 };
 
 const createSortBtn = () => {
-  const btn = createElementWithClassName("button", "sort-btn");
+  const btn = createElementWithClassName("button", "js-sort-btn");
   const sortArrow = createElementWithClassName("img", "sort-img");
   // bothのイメージをデフォルトとする
   sortArrow.src = "./img/both.svg";
@@ -164,7 +164,7 @@ const renderSortBtn = (usersData) => {
 };
 
 const clickSortBtn = (usersData) => {
-  const sortArrowBtns = document.querySelectorAll(".sort-btn");
+  const sortArrowBtns = document.querySelectorAll(".js-sort-btn");
   sortArrowBtns.forEach((sortArrowBtn) => {
     const tHeaderId = sortArrowBtn.parentNode.id;
     const sortArrowImg = sortArrowBtn.firstElementChild;
