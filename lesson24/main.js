@@ -21,7 +21,6 @@ submitBtn.addEventListener(
 
 const observer = new IntersectionObserver((targets) => {
   if (targets[0].intersectionRatio === 1) {
-    observer.disconnect();
     checkBox.disabled = false;
     checkBox.checked = true;
   }
