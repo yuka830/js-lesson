@@ -5,25 +5,30 @@
 }
 
 .register-form {
-  max-width: 400px;
+  max-width: 500px;
   margin: 0 auto;
 }
 
-.register-form__entries {
+/* .register-form__entries {
   margin-bottom: 30px;
-}
-
+} */
 .register-form__item {
   display: flex;
-}
-
-.register-form__item:not(:last-child) {
-  margin-bottom: 20px;
+  margin-bottom: 30px;
 }
 
 .register-form__label {
   display: inline-block;
-  width: 150px;
+  width: 30%;
+}
+
+.register-form__input {
+  width: 70%;
+}
+
+.register-form__input input {
+  width: 80%;
+  box-sizing: border-box;
 }
 
 .register-form__terms {
@@ -43,7 +48,7 @@
   transition: all 0.3s;
 }
 
-.btn:hover {
+.btn:hover:not([disabled]) {
   color: #fff;
   background-color: #000;
 }
@@ -54,6 +59,11 @@
 
 .submit-btn:hover {
   background-color: #008001;
+}
+
+.submit-btn:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
 }
 
 .terms {
@@ -87,6 +97,11 @@
   font-weight: 600;
   font-size: 20px;
   margin: 20px 0 10px;
+}
+
+.error-txt {
+  font-size: 12px;
+  color: #ff0100;
 }
 
 .hidden {
