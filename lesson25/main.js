@@ -32,6 +32,15 @@ submitBtn.addEventListener(
   false
 );
 
+checkBox.addEventListener(
+  "click",
+  (e) => {
+    e.target.checked ? (flags.checkBox = true) : (flags.checkBox = false);
+    switchSubmitBtn();
+  },
+  false
+);
+
 const checkInputVal = (targetForm) => {
   const targetVal = targetForm.value;
   let result;
