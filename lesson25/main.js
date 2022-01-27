@@ -41,58 +41,44 @@ checkBox.addEventListener(
   false
 );
 
+const validations = {
+  userName: {
+    maxLength: 15,
+    minLength: 1,
+    errorMessage: "※ユーザー名は1文字以上15文字以下にしてください。",
+    isValid: (value) => {
+      return (
+        value.length >= validations.userName.minLength &&
+        value.length <= validations.userName.maxLength
+      );
+    }
+  },
+  email: {
+    errorMessage: "メールアドレスが空欄・もしくは形式が異なっています。",
+    isValid: (value) => /.+@.+\..+/.test(value)
+  },
+  pass: {
+    errorMessage: "8文字以上の大小の英数字を交ぜたものにしてください。",
+    isValid: (value) =>
+      /^(?=.*?[a-z])(?=.*?[A-Z])(?=.*?\d)[a-zA-Z\d]{8,}$/.test(value)
+  }
+};
+
 const checkInputVal = (targetForm) => {
-  const targetVal = targetForm.value;
-  let result;
-
-  switch (targetForm.id) {
-    case "userName":
-      const minLength = 1;
-      const maxLength = 15;
-      result = targetVal.length >= minLength && targetVal.length <= maxLength;
-      break;
-    case "email":
-      const emailValid = /^\w[\w_.-]*@.+\..+/;
-      result = emailValid.test(targetVal);
-      break;
-    case "pass":
-      const passValid = /(?=.*[a-z])(?=.*[A-Z])(?=.*\d)\w{8,}/;
-      result = passValid.test(targetVal);
-      break;
-    default:
-      console.error(`は見つかりませんでした`);
+  const targetInput = document.getElementById(targetForm.id);
+  const result = validations[targetForm.id].isValid(targetForm.value);
+  if (result) {
+    flags[targetForm.id] = true;
+    return;
   }
-
-  result ? (flags[targetForm.id] = true) : (flags[targetForm.id] = false);
-  return result;
+  flags[targetForm.id] = false;
+  targetInput.after(createErrorMessage(targetForm));
 };
 
-const createErrorMessage = (targetFormId) => {
+const createErrorMessage = (targetForm) => {
   const errorTxt = createElementWithClassName("p", "error-txt");
-  errorTxt.id = "js-errorTxt";
-
-  switch (targetFormId) {
-    case "userName":
-      errorTxt.textContent = "ユーザー名は15文字以下にしてください。";
-      break;
-    case "email":
-      errorTxt.textContent = "メールアドレスの形式になっていません。";
-      break;
-    case "pass":
-      errorTxt.textContent =
-        "8文字以上の大小の英数字を交ぜたものにしてください。";
-      break;
-    default:
-      console.error(`は見つかりませんでした`);
-  }
-
+  errorTxt.textContent = validations[targetForm.id].errorMessage;
   return errorTxt;
-};
-
-const renderErrorMessage = (targetFormId) => {
-  const errorTxt = createErrorMessage(targetFormId);
-  const targetInput = document.getElementById(targetFormId);
-  targetInput.after(errorTxt);
 };
 
 //It's called in the HTML file
