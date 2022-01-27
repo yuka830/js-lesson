@@ -95,11 +95,11 @@ const observer = new IntersectionObserver((targets) => {
     checkBox.checked = true;
     flags.checkBox = true;
   }
-  switchSbumitBtn();
+  switchSubmitBtn();
 });
 observer.observe(scrollEnd);
 
-const switchSbumitBtn = () => {
+const switchSubmitBtn = () => {
   const checkFlags = Object.values(flags).every((val) => val);
   checkFlags ? (submitBtn.disabled = false) : (submitBtn.disabled = true);
 };
