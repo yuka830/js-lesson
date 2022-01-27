@@ -83,11 +83,10 @@ const createErrorMessage = (targetForm) => {
 
 //It's called in the HTML file
 const validateInputVal = (targetForm) => {
-  const check = checkInputVal(targetForm);
   const errorTxtEle = targetForm.nextElementSibling;
-  !check && !errorTxtEle && renderErrorMessage(targetForm.id);
-  check && errorTxtEle && errorTxtEle.remove();
-  switchSbumitBtn();
+  checkInputVal(targetForm);
+  errorTxtEle && errorTxtEle.remove();
+  switchSubmitBtn();
 };
 
 const observer = new IntersectionObserver((targets) => {
