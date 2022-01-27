@@ -46,21 +46,21 @@ const validations = {
     maxLength: 15,
     minLength: 1,
     errorMessage: "※ユーザー名は1文字以上15文字以下にしてください。",
-    isValid: (value) => {
+    isValid: (val) => {
       return (
-        value.length >= validations.userName.minLength &&
-        value.length <= validations.userName.maxLength
+        val.length >= validations.userName.minLength &&
+        val.length <= validations.userName.maxLength
       );
     }
   },
   email: {
     errorMessage: "メールアドレスが空欄・もしくは形式が異なっています。",
-    isValid: (value) => /.+@.+\..+/.test(value)
+    isValid: (val) => /.+@.+\..+/.test(val)
   },
   pass: {
     errorMessage: "8文字以上の大小の英数字を交ぜたものにしてください。",
-    isValid: (value) =>
-      /^(?=.*?[a-z])(?=.*?[A-Z])(?=.*?\d)[a-zA-Z\d]{8,}$/.test(value)
+    isValid: (val) =>
+      /^(?=.*?[a-z])(?=.*?[A-Z])(?=.*?\d)[a-zA-Z\d]{8,}$/.test(val)
   }
 };
 
