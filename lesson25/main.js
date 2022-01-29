@@ -6,11 +6,15 @@ const openModal = document.getElementById("js-openModal");
 const closeModal = document.getElementById("js-closeModalBtn");
 const mask = document.getElementById("js-mask");
 
+const userNameInput = document.getElementById("userName");
+const mailInput = document.getElementById("email");
+const passInput = document.getElementById("pass");
+
 const flags = {
   userName: false,
   email: false,
   pass: false,
-  checkBox: false,
+  checkBox: false
 };
 
 const createElementWithClassName = (element, name) => {
@@ -51,17 +55,17 @@ const validations = {
         val.length >= validations.userName.minLength &&
         val.length <= validations.userName.maxLength
       );
-    },
+    }
   },
   email: {
     errorMessage: "メールアドレスが空欄・もしくは形式が異なっています。",
-    isValid: (val) => /.+@.+\..+/.test(val),
+    isValid: (val) => /.+@.+\..+/.test(val)
   },
   pass: {
     errorMessage: "8文字以上の大小の英数字を交ぜたものにしてください。",
     isValid: (val) =>
-      /^(?=.*?[a-z])(?=.*?[A-Z])(?=.*?\d)[a-zA-Z\d]{8,}$/.test(val),
-  },
+      /^(?=.*?[a-z])(?=.*?[A-Z])(?=.*?\d)[a-zA-Z\d]{8,}$/.test(val)
+  }
 };
 
 const checkInputVal = (targetForm) => {
@@ -81,13 +85,16 @@ const createErrorMessage = (targetForm) => {
   return errorTxt;
 };
 
-//It's called in the HTML file
 const validateInputVal = (targetForm) => {
   const errorTxtEle = targetForm.nextElementSibling;
   checkInputVal(targetForm);
   errorTxtEle && errorTxtEle.remove();
   switchSubmitBtn();
 };
+
+userNameInput.addEventListener("blur", (e) => validateInputVal(e.target));
+mailInput.addEventListener("blur", (e) => validateInputVal(e.target));
+passInput.addEventListener("blur", (e) => validateInputVal(e.target));
 
 const observer = new IntersectionObserver((targets) => {
   if (targets[0].intersectionRatio === 1) {
