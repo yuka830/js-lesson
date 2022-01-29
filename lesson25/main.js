@@ -10,7 +10,7 @@ const flags = {
   userName: false,
   email: false,
   pass: false,
-  checkBox: false
+  checkBox: false,
 };
 
 const createElementWithClassName = (element, name) => {
@@ -35,7 +35,7 @@ submitBtn.addEventListener(
 checkBox.addEventListener(
   "click",
   (e) => {
-    e.target.checked ? (flags.checkBox = true) : (flags.checkBox = false);
+    flags.checkBox = e.target.checked ? true : false;
     switchSubmitBtn();
   },
   false
@@ -51,17 +51,17 @@ const validations = {
         val.length >= validations.userName.minLength &&
         val.length <= validations.userName.maxLength
       );
-    }
+    },
   },
   email: {
     errorMessage: "メールアドレスが空欄・もしくは形式が異なっています。",
-    isValid: (val) => /.+@.+\..+/.test(val)
+    isValid: (val) => /.+@.+\..+/.test(val),
   },
   pass: {
     errorMessage: "8文字以上の大小の英数字を交ぜたものにしてください。",
     isValid: (val) =>
-      /^(?=.*?[a-z])(?=.*?[A-Z])(?=.*?\d)[a-zA-Z\d]{8,}$/.test(val)
-  }
+      /^(?=.*?[a-z])(?=.*?[A-Z])(?=.*?\d)[a-zA-Z\d]{8,}$/.test(val),
+  },
 };
 
 const checkInputVal = (targetForm) => {
