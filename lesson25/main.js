@@ -35,7 +35,7 @@ submitBtn.addEventListener(
 checkBox.addEventListener(
   "click",
   (e) => {
-    flags.checkBox = e.target.checked ? true : false;
+    flags.checkBox = e.target.checked;
     switchSubmitBtn();
   },
   false
