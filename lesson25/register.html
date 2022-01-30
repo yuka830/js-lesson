@@ -17,17 +17,17 @@
       <dl class="register-form__entries">
         <div class="register-form__item">
           <dt class="register-form__label">
-            <label for="user-name">※ユーザー名</label>
+            <label for="userName">※ユーザー名</label>
           </dt>
-          <dd>
-            <input type="text" name="user-name" id="user-name" />
+          <dd class="register-form__input">
+            <input type="text" name="user-name" id="userName" />
           </dd>
         </div>
         <div class="register-form__item">
           <dt class="register-form__label">
             <label for="email">※メールアドレス</label>
           </dt>
-          <dd>
+          <dd class="register-form__input">
             <input type="email" name="email" id="email" />
           </dd>
         </div>
@@ -35,7 +35,7 @@
           <dt class="register-form__label">
             <label for="pass">※パスワード</label>
           </dt>
-          <dd>
+          <dd class="register-form__input">
             <input type="password" name="pass" id="pass" />
           </dd>
         </div>
@@ -47,7 +47,7 @@
         </label>
       </div>
       <div class="register-form__btn">
-        <input type="submit" value="送信" id="js-submitBtn" class="submit-btn btn" />
+        <input type="submit" value="送信" id="js-submitBtn" class="submit-btn btn" disabled />
       </div>
     </form>
     <div id="js-modal" class="modal hidden">
@@ -158,8 +158,12 @@
               <li>登録事項に虚偽の事実があることが判明した場合</li>
               <li>料金等の支払債務の不履行があった場合</li>
               <li>当社からの連絡に対し，一定期間返答がない場合</li>
-              <li>本サービスについて，最終の利用から一定期間利用がない場合</li>
-              <li>その他，当社が本サービスの利用を適当でないと判断した場合</li>
+              <li>
+                本サービスについて，最終の利用から一定期間利用がない場合
+              </li>
+              <li>
+                その他，当社が本サービスの利用を適当でないと判断した場合
+              </li>
             </ol>
           </li>
           <li>
@@ -212,7 +216,7 @@
             本サービスに関して紛争が生じた場合には，当社の本店所在地を管轄する裁判所を専属的合意管轄とします。
           </li>
         </ol>
-        <br>
+        <br />
         <p>以上</p>
       </div>
       <div class="modal-btn">
