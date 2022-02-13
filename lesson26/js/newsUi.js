@@ -11,7 +11,7 @@ const createElementWithClassName = (element, name) => {
 };
 
 //comment-icon
-const creatCommentIcon = (element) => {
+const renderCommentIcon = (element) => {
   const commentSpan = createElementWithClassName("span", "comment-icon");
   const commentImg = document.createElement("img");
   commentImg.src = "./img/comment.png";
@@ -20,7 +20,7 @@ const creatCommentIcon = (element) => {
 };
 
 //new-label
-const creatNewLabel = (element) => {
+const renderNewLabel = (element) => {
   const newLabel = createElementWithClassName("span", "new-label");
   newLabel.textContent = "NEW!";
   element.appendChild(newLabel);
@@ -43,7 +43,7 @@ const creatNewsImg = (element, category) => {
 };
 
 //tab
-const createNewTab = (newsUiItems) => {
+const renderNewTab = (newsUiItems) => {
   const tabFragment = document.createDocumentFragment();
 
   newsUiItems.forEach((newsUiItem, index) => {
@@ -69,8 +69,8 @@ const createArticleTitles = ({ articles }) => {
     a.href = "#";
     titleFragment.appendChild(contentLi).appendChild(a);
 
-    isWithinSpecificDays(article.date) && creatNewLabel(contentLi);
-    article.comments > 0 && creatCommentIcon(contentLi);
+    isWithinSpecificDays(article.date) && renderNewLabel(contentLi);
+    article.comments > 0 && renderCommentIcon(contentLi);
   });
   return titleFragment;
 };
@@ -83,7 +83,7 @@ const createContentsItem = (newsUiItems) => {
     const contentUl = createElementWithClassName("ul", "js-news__lists");
     const categoryName = newsUiItem.category;
     newsContent.classList.add(`js-${categoryName}`);
-    //とりあえず最初のインデックスをアクティブなタブとする 
+    //とりあえず最初のインデックスをアクティブなタブとする
     index === 0 && newsContent.classList.add("is-show");
     creatNewsImg(elementForFlex, categoryName);
 
@@ -97,7 +97,7 @@ const createContentsItem = (newsUiItems) => {
 };
 
 //news
-const createNewContent = (newsUiItems) =>
+const renderNewContent = (newsUiItems) =>
   newsWrapper.appendChild(createContentsItem(newsUiItems));
 
 //tabSwitch
@@ -139,10 +139,27 @@ const fetchedNewsComponentData = async () => {
   }
 };
 
+const createLogoutBtn = () => {
+  const btn = createElementWithClassName("button", "btn");
+  btn.id = "js-logout";
+  btn.textContent = "ログアウト";
+  return btn;
+};
+
+const renderLogoutBtn = () => {
+  const btn = createLogoutBtn();
+  btn.addEventListener("click", () => {
+    localStorage.removeItem("token");
+    window.location.href = "./login.html";
+  });
+  newsWrapper.after(btn);
+};
+
 const init = async () => {
   const newsUiItems = await fetchedNewsComponentData();
-  createNewTab(newsUiItems);
-  createNewContent(newsUiItems);
+  renderNewTab(newsUiItems);
+  renderNewContent(newsUiItems);
+  renderLogoutBtn();
 };
 
 init();
