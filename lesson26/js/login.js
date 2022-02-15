@@ -13,7 +13,6 @@ const createElementWithClassName = (element, name) => {
   return createdElement;
 };
 
-localStorage.getItem("token") && (window.location.href = "./news.html");
 
 const loginHandler = async (e) => {
   e.preventDefault();
