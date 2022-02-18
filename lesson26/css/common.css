@@ -44,7 +44,7 @@
   color: #000;
 }
 
-.btn:hover a{
+.btn:hover a {
   color: #fff;
 }
 
@@ -77,11 +77,16 @@
   box-sizing: border-box;
 }
 
-.form__terms, .form__btn {
+.form__terms,
+.form__btn {
   text-align: center;
   margin-bottom: 20px;
 }
 
 .center {
   text-align: center;
+}
+
+.text {
+  margin-bottom: 20px;
 }
