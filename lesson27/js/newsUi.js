@@ -155,6 +155,10 @@ const renderLogoutBtn = () => {
   newsWrapper.after(btn);
 };
 
+window.addEventListener("storage", () => {
+  if (!localStorage.getItem("token")) window.location.href = "login.html";
+});
+
 const init = async () => {
   const newsUiItems = await fetchedNewsComponentData();
   renderNewTab(newsUiItems);
