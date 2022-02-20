@@ -1,0 +1,92 @@
+.wrapper {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 60px;
+}
+
+.title {
+  font-weight: 700;
+  font-size: 24px;
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.sub-title {
+  font-weight: 600;
+  font-size: 20px;
+  margin: 20px 0 10px;
+}
+
+.error-txt {
+  font-size: 12px;
+  color: #ff0100;
+}
+
+.hidden {
+  display: none;
+}
+
+.btn {
+  cursor: pointer;
+  background-color: #fff;
+  border: 1px solid #000;
+  padding: 5px 20px;
+  transition: all 0.3s;
+}
+
+.btn:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.btn a {
+  text-decoration: none;
+  color: #000;
+}
+
+.btn:hover a {
+  color: #fff;
+}
+
+.btn:hover:not([disabled]) {
+  color: #fff;
+  background-color: #000;
+}
+
+.form {
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.form__item {
+  display: flex;
+  margin-bottom: 30px;
+}
+
+.form__label {
+  display: inline-block;
+  width: 30%;
+}
+
+.form__input {
+  width: 70%;
+}
+
+.form__input input {
+  width: 80%;
+  box-sizing: border-box;
+}
+
+.form__terms,
+.form__btn {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.center {
+  text-align: center;
+}
+
+.text {
+  margin-bottom: 20px;
+}

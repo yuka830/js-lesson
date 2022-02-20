@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <title>TerraceTechフロントエンドエンジニア養成所</title>
+  <link rel="stylesheet" href="css/reset.css" type="text/css" />
+  <link rel="stylesheet" href="css/common.css" type="text/css" />
+  <link rel="stylesheet" href="css/login.css" type="text/css" />
+  <script>localStorage.getItem("token") && (window.location.href = "./news.html");
+  </script>
+  <script src="js/login.js" defer></script>
+</head>
+
+<body>
+  <section class="login wrapper">
+    <h1 class="title">ログイン</h1>
+    <form id="js-form" class="form">
+      <dl class="form__entries">
+        <div class="form__item">
+          <dt class="form__label">
+            <label for="userName">※ユーザー名</label>
+          </dt>
+          <dd class="form__input">
+            <input type="text" name="user-name" id="userName" />
+          </dd>
+        </div>
+        <div class="form__item">
+          <dt class="form__label">
+            <label for="pass">※パスワード</label>
+          </dt>
+          <dd class="form__input">
+            <input type="password" name="pass" id="pass" />
+          </dd>
+        </div>
+      </dl>
+      <div class="form__btn">
+        <input type="submit" value="ログイン" id="js-loginBtn" class="login-btn btn" disabled />
+      </div>
+      <div class="login__other">
+        <p class="login__passforgot">
+          <a href="/forgotpassword.html">パスワードをお忘れですか？</a>
+        </p>
+        <button class="login__btn btn">
+          <a href="/register.html">会員登録はこちら</a>
+        </button>
+      </div>
+    </form>
+  </section>
+</body>
+
+</html>
