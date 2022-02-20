@@ -57,7 +57,7 @@ const checkUserData = (inputVal) => {
 };
 
 const changeLocation = (result) => {
-  window.location.href = result ? "./news.html" : "./login-failure.html";
+  window.location.href = result ? "./index.html" : "./login-failure.html";
 };
 
 /* バリデーション */
