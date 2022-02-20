@@ -4,7 +4,7 @@ const passInput = document.getElementById("pass");
 
 const flags = {
   userName: false,
-  pass: false
+  pass: false,
 };
 
 const createElementWithClassName = (element, name) => {
@@ -17,7 +17,7 @@ const loginHandler = async (e) => {
   e.preventDefault();
   const inputVal = {
     name: userNameInput.value,
-    pass: passInput.value
+    pass: passInput.value,
   };
 
   let result;
@@ -40,7 +40,7 @@ const login = (inputVal) => {
       resolve({
         token: "far0fja*ff]afaawfqrlzkfq@aq9283af",
         ok: true,
-        code: 200
+        code: 200,
       });
     } else {
       reject({ ok: false, code: 401 });
@@ -51,7 +51,7 @@ const login = (inputVal) => {
 const checkUserData = (inputVal) => {
   const userData = {
     name: "morikenjuku",
-    pass: "N302aoe3"
+    pass: "N302aoe3",
   };
   return inputVal.name === userData.name && inputVal.pass === userData.pass;
 };
@@ -71,13 +71,13 @@ const validations = {
         val.length >= validations.userName.minLength &&
         val.length <= validations.userName.maxLength
       );
-    }
+    },
   },
   pass: {
     errorMessage: "8文字以上の大小の英数字を交ぜたものにしてください。",
     isValid: (val) =>
-      /^(?=.*?[a-z])(?=.*?[A-Z])(?=.*?\d)[a-zA-Z\d]{8,}$/.test(val)
-  }
+      /^(?=.*?[a-z])(?=.*?[A-Z])(?=.*?\d)[a-zA-Z\d]{8,}$/.test(val),
+  },
 };
 
 const checkInputVal = (targetForm) => {
