@@ -13,7 +13,6 @@ const createElementWithClassName = (element, name) => {
   return createdElement;
 };
 
-
 const loginHandler = async (e) => {
   e.preventDefault();
   const inputVal = {
@@ -38,7 +37,11 @@ loginBtn.addEventListener("click", loginHandler);
 const login = (inputVal) => {
   return new Promise((resolve, reject) => {
     if (checkUserData(inputVal)) {
-      resolve({ token: "fafae92rfjafa03", ok: true, code: 200 });
+      resolve({
+        token: "far0fja*ff]afaawfqrlzkfq@aq9283af",
+        ok: true,
+        code: 200
+      });
     } else {
       reject({ ok: false, code: 401 });
     }
