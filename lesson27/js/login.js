@@ -85,10 +85,13 @@ const checkInputVal = (targetForm) => {
   const result = validations[targetForm.id].isValid(targetForm.value);
   if (result) {
     flags[targetForm.id] = true;
+    targetForm.classList.contains("error-shake") &&
+      targetForm.classList.remove("error-shake");
     return;
   }
   flags[targetForm.id] = false;
   targetInput.after(createErrorMessage(targetForm));
+  targetForm.classList.add("error-shake");
 };
 
 const createErrorMessage = (targetForm) => {
