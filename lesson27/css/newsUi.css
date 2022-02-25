@@ -21,6 +21,7 @@
   border-right: none;
   text-align: center;
   cursor: pointer;
+  line-height: 1.5em;
 }
 
 .tab:last-child {
@@ -37,6 +38,7 @@
   border: solid 1px black;
   border-top: none;
   padding: 20px;
+  background-color: #fff;
 }
 
 .is-show {
