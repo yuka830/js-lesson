@@ -14,7 +14,7 @@ const flags = {
   userName: false,
   email: false,
   pass: false,
-  checkBox: false
+  checkBox: false,
 };
 
 const createElementWithClassName = (element, name) => {
@@ -55,17 +55,17 @@ const validations = {
         val.length >= validations.userName.minLength &&
         val.length <= validations.userName.maxLength
       );
-    }
+    },
   },
   email: {
     errorMessage: "メールアドレスが空欄・もしくは形式が異なっています。",
-    isValid: (val) => /.+@.+\..+/.test(val)
+    isValid: (val) => /.+@.+\..+/.test(val),
   },
   pass: {
     errorMessage: "8文字以上の大小の英数字を交ぜたものにしてください。",
     isValid: (val) =>
-      /^(?=.*?[a-z])(?=.*?[A-Z])(?=.*?\d)[a-zA-Z\d]{8,}$/.test(val)
-  }
+      /^(?=.*?[a-z])(?=.*?[A-Z])(?=.*?\d)[a-zA-Z\d]{8,}$/.test(val),
+  },
 };
 
 const checkInputVal = (targetForm) => {
@@ -73,10 +73,13 @@ const checkInputVal = (targetForm) => {
   const result = validations[targetForm.id].isValid(targetForm.value);
   if (result) {
     flags[targetForm.id] = true;
+    targetForm.classList.contains("error-shake") &&
+      targetForm.classList.remove("error-shake");
     return;
   }
   flags[targetForm.id] = false;
   targetInput.after(createErrorMessage(targetForm));
+  targetForm.classList.add("error-shake");
 };
 
 const createErrorMessage = (targetForm) => {

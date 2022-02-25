@@ -134,3 +134,22 @@ body {
 .text {
   margin-bottom: 20px;
 }
+
+.error-shake {
+  animation: shaking 3s ease forwards reverse;
+}
+
+@keyframes shaking {
+  90% {
+    transform: translateX(0);
+  }
+  93% {
+    transform: translateX(-20px);
+  }
+  96% {
+    transform: translateX(10px);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
