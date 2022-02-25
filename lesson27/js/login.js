@@ -20,17 +20,16 @@ const loginHandler = async () => {
     name: userNameInput.value,
     pass: passInput.value,
   };
-  let result;
   try {
     const token = await login(inputVal);
     localStorage.setItem("token", JSON.stringify(token));
-    result = true;
   } catch {
-    result = false;
-  } finally {
-    changeModalImgAndText(result);
-    changeLocation(result);
+    changeModalImgAndErrorText();
+    changeErrorLocation();
+    return;
   }
+  changeModalImgAndText();
+  changeSuccessLocation();
 };
 
 loginBtn.addEventListener("click", (e) => {
@@ -63,9 +62,15 @@ const checkUserData = (inputVal) => {
   return inputVal.name === userData.name && inputVal.pass === userData.pass;
 };
 
-const changeLocation = (result) => {
+const changeSuccessLocation = () => {
   setTimeout(() => {
-    window.location.href = result ? "./index.html" : "./login-failure.html";
+    window.location.href = "./index.html";
+  }, 3000);
+};
+
+const changeErrorLocation = () => {
+  setTimeout(() => {
+    window.location.href = "./login-failure.html";
   }, 3000);
 };
 
@@ -100,16 +105,18 @@ const showModal = () => {
   mask.classList.remove("hidden");
 };
 
-const changeModalImgAndText = (result) => {
+const changeModalImgAndText = () => {
   const img = document.getElementById("js-modalImg");
   const text = document.getElementById("js-modalText");
-  if (!result) {
-    img.src = "./img/failure.png";
-    text.textContent = "Failed...";
-    return;
-  }
   img.src = "./img/success.png";
   text.textContent = "Success!";
+};
+
+const changeModalImgAndErrorText = () => {
+  const img = document.getElementById("js-modalImg");
+  const text = document.getElementById("js-modalText");
+  img.src = "./img/failure.png";
+  text.textContent = "Failed...";
 };
 
 /* バリデーション */
