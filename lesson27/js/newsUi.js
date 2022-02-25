@@ -1,6 +1,6 @@
 import { differenceInDays } from "date-fns";
 
-const jsonUrl = "https://myjson.dit.upm.es/api/bins/4iwh";
+const jsonUrl = "https://myjson.dit.upm.es/api/bins/g7df";
 const newsWrapper = document.getElementById("js-news");
 const tabUl = document.getElementById("js-news-tabs");
 

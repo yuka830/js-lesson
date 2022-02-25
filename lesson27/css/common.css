@@ -135,6 +135,10 @@ body {
   margin-bottom: 20px;
 }
 
+.hidden {
+  display: none;
+}
+
 .error-shake {
   animation: shaking 3s ease forwards reverse;
 }

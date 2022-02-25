@@ -1,6 +1,8 @@
+const loginWrapper = document.getElementById("js-login");
 const loginBtn = document.getElementById("js-loginBtn");
 const userNameInput = document.getElementById("userName");
 const passInput = document.getElementById("pass");
+const mask = document.getElementById("js-mask");
 
 const flags = {
   userName: false,
@@ -13,13 +15,11 @@ const createElementWithClassName = (element, name) => {
   return createdElement;
 };
 
-const loginHandler = async (e) => {
-  e.preventDefault();
+const loginHandler = async () => {
   const inputVal = {
     name: userNameInput.value,
     pass: passInput.value,
   };
-
   let result;
   try {
     const token = await login(inputVal);
@@ -28,23 +28,30 @@ const loginHandler = async (e) => {
   } catch {
     result = false;
   } finally {
+    changeModalImgAndText(result);
     changeLocation(result);
   }
 };
 
-loginBtn.addEventListener("click", loginHandler);
+loginBtn.addEventListener("click", (e) => {
+  e.preventDefault();
+  showModal();
+  loginHandler();
+});
 
 const login = (inputVal) => {
   return new Promise((resolve, reject) => {
-    if (checkUserData(inputVal)) {
-      resolve({
-        token: "far0fja*ff]afaawfqrlzkfq@aq9283af",
-        ok: true,
-        code: 200,
-      });
-    } else {
-      reject({ ok: false, code: 401 });
-    }
+    setTimeout(() => {
+      if (checkUserData(inputVal)) {
+        resolve({
+          token: "far0fja*ff]afaawfqrlzkfq@aq9283af",
+          ok: true,
+          code: 200,
+        });
+      } else {
+        reject({ ok: false, code: 401 });
+      }
+    }, 3000);
   });
 };
 
@@ -57,7 +64,52 @@ const checkUserData = (inputVal) => {
 };
 
 const changeLocation = (result) => {
-  window.location.href = result ? "./index.html" : "./login-failure.html";
+  setTimeout(() => {
+    window.location.href = result ? "./index.html" : "./login-failure.html";
+  }, 3000);
+};
+
+/* モーダル  */
+const careateModal = () => {
+  const modal = createElementWithClassName("div", "modal");
+  modal.id = "js-modal";
+  return modal;
+};
+
+const createLoading = () => {
+  const loader = createElementWithClassName("div", "loading");
+  const img = createElementWithClassName("img", "loading-img");
+  img.id = "js-modalImg";
+  img.src = "./img/loading-circle.gif";
+  loader.appendChild(img);
+  return loader;
+};
+
+const createText = () => {
+  const text = createElementWithClassName("p", "modal-text");
+  text.id = "js-modalText";
+  text.textContent = "Checking…";
+  return text;
+};
+
+const showModal = () => {
+  const modal = careateModal();
+  modal.appendChild(createLoading());
+  modal.insertAdjacentElement("beforeend", createText());
+  loginWrapper.appendChild(modal);
+  mask.classList.remove("hidden");
+};
+
+const changeModalImgAndText = (result) => {
+  const img = document.getElementById("js-modalImg");
+  const text = document.getElementById("js-modalText");
+  if (!result) {
+    img.src = "./img/failure.png";
+    text.textContent = "Failed...";
+    return;
+  }
+  img.src = "./img/success.png";
+  text.textContent = "Success!";
 };
 
 /* バリデーション */
