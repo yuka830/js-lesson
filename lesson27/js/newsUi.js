@@ -1,6 +1,6 @@
 import { differenceInDays } from "date-fns";
 
-const jsonUrl = "https://myjson.dit.upm.es/api/bins/4iwh";
+const jsonUrl = "https://myjson.dit.upm.es/api/bins/g7df";
 const newsWrapper = document.getElementById("js-news");
 const tabUl = document.getElementById("js-news-tabs");
 
@@ -154,6 +154,10 @@ const renderLogoutBtn = () => {
   });
   newsWrapper.after(btn);
 };
+
+window.addEventListener("storage", () => {
+  if (!localStorage.getItem("token")) window.location.href = "login.html";
+});
 
 const init = async () => {
   const newsUiItems = await fetchedNewsComponentData();

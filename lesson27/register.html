@@ -13,44 +13,46 @@
 
 <body>
   <section class="membership-register wrapper">
-    <h1 class="title">会員登録</h1>
-    <form id="js-form" class="form">
-      <dl class="form__entries">
-        <div class="form__item">
-          <dt class="form__label">
-            <label for="userName">※ユーザー名</label>
-          </dt>
-          <dd class="form__input">
-            <input type="text" name="user-name" id="userName" />
-          </dd>
+    <div class="form-wrapper">
+      <h1 class="title">会員登録</h1>
+      <form id="js-form" class="form">
+        <dl class="form__entries">
+          <div class="form__item">
+            <dt class="form__label">
+              <label for="userName">※ユーザー名</label>
+            </dt>
+            <dd class="form__input">
+              <input type="text" name="user-name" id="userName" />
+            </dd>
+          </div>
+          <div class="form__item">
+            <dt class="form__label">
+              <label for="email">※メールアドレス</label>
+            </dt>
+            <dd class="form__input">
+              <input type="email" name="email" id="email" />
+            </dd>
+          </div>
+          <div class="form__item">
+            <dt class="form__label">
+              <label for="pass">※パスワード</label>
+            </dt>
+            <dd class="form__input">
+              <input type="password" name="pass" id="pass" />
+            </dd>
+          </div>
+        </dl>
+        <div class="form__terms">
+          <input type="checkbox" name="check" id="js-checkBox" disabled />
+          <label for="js-checkBox">
+            <a href="#" id="js-openModal" class="terms-link">利用規約</a>を読み同意しました
+          </label>
         </div>
-        <div class="form__item">
-          <dt class="form__label">
-            <label for="email">※メールアドレス</label>
-          </dt>
-          <dd class="form__input">
-            <input type="email" name="email" id="email" />
-          </dd>
+        <div class="form__btn">
+          <input type="submit" value="送信" id="js-submitBtn" class="form-btn btn" disabled />
         </div>
-        <div class="form__item">
-          <dt class="form__label">
-            <label for="pass">※パスワード</label>
-          </dt>
-          <dd class="form__input">
-            <input type="password" name="pass" id="pass" />
-          </dd>
-        </div>
-      </dl>
-      <div class="form__terms">
-        <input type="checkbox" name="check" id="js-checkBox" disabled />
-        <label for="js-checkBox">
-          <a href="#" id="js-openModal" class="terms-link">利用規約</a>を読み同意しました
-        </label>
-      </div>
-      <div class="form__btn">
-        <input type="submit" value="送信" id="js-submitBtn" class="submit-btn btn" disabled />
-      </div>
-    </form>
+      </form>
+    </div>
     <div id="js-modal" class="modal hidden">
       <h1 class="title">利用規約</h1>
       <div class="terms">

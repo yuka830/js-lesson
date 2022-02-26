@@ -8,6 +8,10 @@
   <link rel="stylesheet" href="/css/reset.css" type="text/css" />
   <link rel="stylesheet" href="css/common.css" type="text/css" />
   <link rel="stylesheet" href="/css/newsUi.css" type="text/css" />
+  <script>
+    if (!localStorage.getItem("token")) window.location.href = "./login.html";
+  </script>
+  <script src="./js/newsUi.js" defer></script>
   <title>TerraceTechフロントエンドエンジニア養成所</title>
 </head>
 
@@ -17,7 +21,6 @@
       <ul id="js-news-tabs" class="news__tabs"></ul>
     </div>
   </section>
-  <script src="./js/newsUi.js"></script>
 </body>
 
 </html>
